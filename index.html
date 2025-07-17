@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live BTC Price Chart</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/moment"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+    <style>
+        .price-up {
+            color: #10b981;
+        }
+        .price-down {
+            color: #ef4444;
+        }
+        .chart-container {
+            position: relative;
+            height: 400px;
+        }
+        .blink {
+            animation: blink-animation 1s steps(2, start) infinite;
+        }
+        @keyframes blink-animation {
+            to {
+                visibility: hidden;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-900 dark:bg-gray-900 dark:text-white transition-colors duration-300">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Header -->
+        <header class="flex justify-between items-center mb-8">
+            <div class="flex items-center">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin Logo" class="w-10 h-10 mr-3">
+                <h1 class="text-2xl font-bold">Bitcoin Live Price</h1>
+            </div>
+            <div class="flex items-center space-x-4">
+                <button id="theme-toggle" class="p-2 rounded-full bg-gray-200 dark:bg-gray-700">
+                    <i class="fas fa-moon dark:hidden"></i>
+                    <i class="fas fa-sun hidden dark:inline"></i>
+                </button>
+                <span id="last-updated" class="text-sm text-gray-500"></span>
+            </div>
+        </header>
+
+        <!-- Price Display -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 mb-8">
+            <div class="flex flex-col md:flex-row md:items-center md:justify-between">
+                <div class="mb-4 md:mb-0">
+                    <div class="flex items-center">
+                        <h2 class="text-3xl font-bold mr-3">BTC/USD</h2>
+                        <span id="btc-price" class="text-3xl font-bold">--</span>
+                        <span id="price-change" class="ml-3 px-2 py-1 rounded-md text-sm"></span>
+                    </div>
+                    <p id="btc-price-formatted" class="text-gray-500 dark:text-gray-400 mt-1">Loading...</p>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">24h High</p>
+                        <p id="24h-high" class="font-bold">--</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">24h Low</p>
+                        <p id="24h-low" class="font-bold">--</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">24h Volume</p>
+                        <p id="24h-volume" class="font-bold">--</p>
+                    </div>
+                    <div class="bg-gray-100 dark:bg-gray-700 p-3 rounded-lg">
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Market Cap</p>
+                        <p id="market-cap" class="font-bold">--</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Chart Controls -->
+        <div class="flex flex-wrap items-center justify-between mb-4">
+            <div class="flex space-x-2 mb-2 md:mb-0">
+                <button class="time-btn px-3 py-1 bg-blue-600 text-white rounded-md" data-days="1">24h</button>
+                <button class="time-btn px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-md" data-days="7">7d</button>
+                <button class="time-btn px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-md" data-days="30">30d</button>
+                <button class="time-btn px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-md" data-days="90">90d</button>
+                <button class="time-btn px-3 py-1 bg-gray-200 dark:bg-gray-700 rounded-md" data-days="365">1y</button>
+            </div>
+            <div class="flex items-center">
+                <span class="text-sm mr-2">Live:</span>
+                <label class="relative inline-flex items-center cursor-pointer">
+                    <input type="checkbox" id="live-toggle" class="sr-only peer" checked>
+                    <div class="w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+                </label>
+            </div>
+        </div>
+
+        <!-- Chart -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+            <div class="chart-container">
+                <canvas id="btcChart"></canvas>
+            </div>
+        </div>
+
+        <!-- Additional Info -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">About Bitcoin</h3>
+                <p class="text-gray-700 dark:text-gray-300 mb-4">
+                    Bitcoin (BTC) is the first decentralized cryptocurrency, created in 2009 by an unknown person or group using the name Satoshi Nakamoto. It enables peer-to-peer transactions without intermediaries.
+                </p>
+                <div class="grid grid-cols-2 gap-4">
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">All-Time High</p>
+                        <p id="ath" class="font-bold">--</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">ATH Date</p>
+                        <p id="ath-date" class="font-bold">--</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Circulating Supply</p>
+                        <p id="circulating-supply" class="font-bold">--</p>
+                    </div>
+                    <div>
+                        <p class="text-sm text-gray-500 dark:text-gray-400">Total Supply</p>
+                        <p id="total-supply" class="font-bold">--</p>
+                    </div>
+                </div>
+            </div>
+            <div class="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
+                <h3 class="text-xl font-bold mb-4">Market Sentiment</h3>
+                <div class="flex items-center mb-4">
+                    <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700 mr-3">
+                        <div id="sentiment-bar" class="bg-blue-600 h-2.5 rounded-full" style="width: 50%"></div>
+                    </div>
+                    <span id="sentiment-percentage" class="text-sm font-medium">50%</span>
+                </div>
+                <p id="sentiment-text" class="text-gray-700 dark:text-gray-300 mb-4">
+                    Loading market sentiment data...
+                </p>
+                <div class="flex justify-between text-sm">
+                    <span class="text-red-500">Fear</span>
+                    <span class="text-gray-500">Neutral</span>
+                    <span class="text-green-500">Greed</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="mt-12 text-center text-gray-500 dark:text-gray-400 text-sm">
+            <p>Data provided by CoinGecko API. Updated every 60 seconds.</p>
+            <p class="mt-2">© 2023 Bitcoin Live Chart. Not financial advice.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Theme toggle
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        if (localStorage.getItem('theme') === 'dark' || (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            html.classList.add('dark');
+        } else {
+            html.classList.remove('dark');
+        }
+
+        themeToggle.addEventListener('click', () => {
+            html.classList.toggle('dark');
+            localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+        });
+
+        // Chart and data variables
+        let btcChart;
+        let currentDays = 1;
+        let isLive = true;
+        let updateInterval;
+        let lastPrice = 0;
+
+        // DOM elements
+        const btcPriceElement = document.getElementById('btc-price');
+        const btcPriceFormattedElement = document.getElementById('btc-price-formatted');
+        const priceChangeElement = document.getElementById('price-change');
+        const lastUpdatedElement = document.getElementById('last-updated');
+        const liveToggle = document.getElementById('live-toggle');
+        const timeButtons = document.querySelectorAll('.time-btn');
+
+        // Format currency
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('en-US', {
+                style: 'currency',
+                currency: 'USD',
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            }).format(value);
+        }
+
+        // Format large numbers
+        function formatLargeNumber(num) {
+            if (num >= 1000000000) {
+                return (num / 1000000000).toFixed(2) + 'B';
+            }
+            if (num >= 1000000) {
+                return (num / 1000000).toFixed(2) + 'M';
+            }
+            if (num >= 1000) {
+                return (num / 1000).toFixed(2) + 'K';
+            }
+            return num.toString();
+        }
+
+        // Update price display with animation
+        function updatePriceDisplay(price, change24h) {
+            const priceNum = parseFloat(price);
+            const changeNum = parseFloat(change24h);
+            
+            // Format price
+            const formattedPrice = formatCurrency(priceNum);
+            btcPriceFormattedElement.textContent = formattedPrice;
+            
+            // Animation for price change
+            if (lastPrice !== 0) {
+                if (priceNum > lastPrice) {
+                    btcPriceElement.classList.add('price-up');
+                    btcPriceElement.classList.remove('price-down');
+                } else if (priceNum < lastPrice) {
+                    btcPriceElement.classList.add('price-down');
+                    btcPriceElement.classList.remove('price-up');
+                }
+                
+                // Add blink animation temporarily
+                btcPriceElement.classList.add('blink');
+                setTimeout(() => {
+                    btcPriceElement.classList.remove('blink');
+                }, 1000);
+            }
+            
+            btcPriceElement.textContent = priceNum.toLocaleString('en-US', {
+                minimumFractionDigits: 2,
+                maximumFractionDigits: 2
+            });
+            
+            // Update change percentage
+            if (changeNum > 0) {
+                priceChangeElement.textContent = `+${changeNum.toFixed(2)}%`;
+                priceChangeElement.className = 'ml-3 px-2 py-1 rounded-md text-sm bg-green-100 text-green-800 dark:bg-green-900 dark:text-green-200';
+            } else if (changeNum < 0) {
+                priceChangeElement.textContent = `${changeNum.toFixed(2)}%`;
+                priceChangeElement.className = 'ml-3 px-2 py-1 rounded-md text-sm bg-red-100 text-red-800 dark:bg-red-900 dark:text-red-200';
+            } else {
+                priceChangeElement.textContent = `${changeNum.toFixed(2)}%`;
+                priceChangeElement.className = 'ml-3 px-2 py-1 rounded-md text-sm bg-gray-100 text-gray-800 dark:bg-gray-700 dark:text-gray-200';
+            }
+            
+            lastPrice = priceNum;
+        }
+
+        // Update last updated time
+        function updateLastUpdated() {
+            const now = new Date();
+            lastUpdatedElement.textContent = `Last updated: ${now.toLocaleTimeString()}`;
+        }
+
+        // Fetch Bitcoin data from CoinGecko API
+        async function fetchBitcoinData(days = 1) {
+            try {
+                // Fetch market data
+                const marketResponse = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin?localization=false&tickers=false&market_data=true&community_data=false&developer_data=false&sparkline=false`);
+                const marketData = await marketResponse.json();
+                
+                // Fetch historical data for chart
+                const chartResponse = await fetch(`https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=${days}&interval=${days === 1 ? 'hourly' : 'daily'}`);
+                const chartData = await chartResponse.json();
+                
+                return {
+                    marketData,
+                    chartData
+                };
+            } catch (error) {
+                console.error('Error fetching Bitcoin data:', error);
+                return null;
+            }
+        }
+
+        // Initialize chart
+        function initChart(labels, prices) {
+            const ctx = document.getElementById('btcChart').getContext('2d');
+            
+            if (btcChart) {
+                btcChart.destroy();
+            }
+            
+            btcChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'BTC Price (USD)',
+                        data: prices,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        fill: true,
+                        tension: 0.4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            mode: 'index',
+                            intersect: false,
+                            callbacks: {
+                                label: function(context) {
+                                    return `Price: ${formatCurrency(context.parsed.y)}`;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            grid: {
+                                display: false
+                            },
+                            ticks: {
+                                maxTicksLimit: 8,
+                                callback: function(value, index, values) {
+                                    if (currentDays === 1) {
+                                        return new Date(this.getLabelForValue(value)).toLocaleTimeString([], { hour: '2-digit' });
+                                    } else {
+                                        return new Date(this.getLabelForValue(value)).toLocaleDateString([], { month: 'short', day: 'numeric' });
+                                    }
+                                }
+                            }
+                        },
+                        y: {
+                            grid: {
+                                color: 'rgba(0, 0, 0, 0.05)'
+                            },
+                            ticks: {
+                                callback: function(value) {
+                                    return formatCurrency(value);
+                                }
+                            }
+                        }
+                    },
+                    interaction: {
+                        mode: 'nearest',
+                        axis: 'x',
+                        intersect: false
+                    }
+                }
+            });
+        }
+
+        // Update chart data
+        function updateChart(labels, prices) {
+            btcChart.data.labels = labels;
+            btcChart.data.datasets[0].data = prices;
+            btcChart.update();
+        }
+
+        // Process data and update UI
+        async function updateData(days = currentDays) {
+            const data = await fetchBitcoinData(days);
+            if (!data) return;
+            
+            const { marketData, chartData } = data;
+            
+            // Update price and stats
+            const currentPrice = marketData.market_data.current_price.usd;
+            const change24h = marketData.market_data.price_change_percentage_24h;
+            const high24h = marketData.market_data.high_24h.usd;
+            const low24h = marketData.market_data.low_24h.usd;
+            const volume24h = marketData.market_data.total_volume.usd;
+            const marketCap = marketData.market_data.market_cap.usd;
+            const ath = marketData.market_data.ath.usd;
+            const athDate = new Date(marketData.market_data.ath_date.usd).toLocaleDateString();
+            const circulatingSupply = marketData.market_data.circulating_supply;
+            const totalSupply = marketData.market_data.max_supply;
+            
+            updatePriceDisplay(currentPrice, change24h);
+            document.getElementById('24h-high').textContent = formatCurrency(high24h);
+            document.getElementById('24h-low').textContent = formatCurrency(low24h);
+            document.getElementById('24h-volume').textContent = formatLargeNumber(volume24h);
+            document.getElementById('market-cap').textContent = formatLargeNumber(marketCap);
+            document.getElementById('ath').textContent = formatCurrency(ath);
+            document.getElementById('ath-date').textContent = athDate;
+            document.getElementById('circulating-supply').textContent = formatLargeNumber(circulatingSupply);
+            document.getElementById('total-supply').textContent = formatLargeNumber(totalSupply);
+            
+            // Update market sentiment (simulated)
+            const sentiment = Math.min(100, Math.max(0, 50 + (change24h * 2)));
+            document.getElementById('sentiment-bar').style.width = `${sentiment}%`;
+            document.getElementById('sentiment-percentage').textContent = `${Math.round(sentiment)}%`;
+            
+            if (sentiment > 70) {
+                document.getElementById('sentiment-text').textContent = 'The market is showing strong bullish sentiment. Investors are optimistic about Bitcoin\'s future performance.';
+                document.getElementById('sentiment-bar').className = 'bg-green-600 h-2.5 rounded-full';
+            } else if (sentiment > 40) {
+                document.getElementById('sentiment-text').textContent = 'The market is in a neutral state. Investors are cautiously watching Bitcoin\'s price movements.';
+                document.getElementById('sentiment-bar').className = 'bg-yellow-500 h-2.5 rounded-full';
+            } else {
+                document.getElementById('sentiment-text').textContent = 'The market is showing bearish sentiment. Investors are concerned about Bitcoin\'s recent performance.';
+                document.getElementById('sentiment-bar').className = 'bg-red-600 h-2.5 rounded-full';
+            }
+            
+            // Process chart data
+            const prices = chartData.prices.map(price => price[1]);
+            const labels = chartData.prices.map(price => new Date(price[0]));
+            
+            if (!btcChart) {
+                initChart(labels, prices);
+            } else {
+                updateChart(labels, prices);
+            }
+            
+            updateLastUpdated();
+        }
+
+        // Set up time period buttons
+        timeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const days = parseInt(button.dataset.days);
+                currentDays = days;
+                
+                // Update active button
+                timeButtons.forEach(btn => {
+                    btn.classList.remove('bg-blue-600', 'text-white');
+                    btn.classList.add('bg-gray-200', 'dark:bg-gray-700');
+                });
+                button.classList.remove('bg-gray-200', 'dark:bg-gray-700');
+                button.classList.add('bg-blue-600', 'text-white');
+                
+                // Update data
+                updateData(days);
+            });
+        });
+
+        // Set up live toggle
+        liveToggle.addEventListener('change', (e) => {
+            isLive = e.target.checked;
+            if (isLive) {
+                startLiveUpdates();
+            } else {
+                clearInterval(updateInterval);
+            }
+        });
+
+        // Start live updates
+        function startLiveUpdates() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+            }
+            updateData(currentDays);
+            updateInterval = setInterval(() => {
+                updateData(currentDays);
+            }, 60000); // Update every 60 seconds
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            startLiveUpdates();
+        });
+    </script>
+</body>
+</html>
