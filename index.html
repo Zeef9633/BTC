@@ -3,213 +3,277 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- SEO Requirements -->
-    <title>ZORIX GLOBAL | Reliable IT & Electronics Trading in Sharjah, UAE</title>
-    <meta name="description" content="ZORIX GLOBAL: Your trusted partner for B2B IT equipment, consumer electronics, and computer parts supply, strategically based in Sharjah SAIF Zone, UAE.">
-    <meta name="keywords" content="IT equipment trading, electronics trading UAE, computer parts supply, Sharjah SAIF Zone, B2B tech supply, Zorix Global, corporate trading, premium IT">
-    <meta name="author" content="Zorix Global">
+    <title>ZORIX GLOBAL | Strategic B2B Tech & Electronics Trading Hub</title>
+    <meta name="description" content="ZORIX GLOBAL: The professional, reliable choice for B2B IT equipment and consumer electronics trading, operating strategically from Sharjah SAIF Zone, UAE.">
 
     <!-- Load Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
-    <!-- Load Lucide Icons for a modern tech look -->
+    <!-- Load Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* Define the primary accent color - Deep Indigo for tech professionalism */
+        /* Define the color palette for a professional look */
         :root {
-            --color-primary: #4f46e5; /* Tailwind indigo-600 */
-            --color-primary-dark: #4338ca; /* Tailwind indigo-700 */
-            --color-light-bg: #f3f4f6; /* Very light grey for background depth */
+            --color-primary: #4f46e5; /* Indigo-600 */
+            --color-primary-dark: #3730a3; /* Indigo-800 */
+            --color-background: #f8fafc; /* Slate-50 / Near-white */
+            --color-dark-text: #1e293b; /* Slate-800 */
+            --color-shadow: 0 10px 15px -3px rgba(79, 70, 229, 0.1), 0 4px 6px -2px rgba(79, 70, 229, 0.05); /* Subtle Indigo shadow */
         }
         
-        /* Custom font setup (Inter for corporate readability) */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+        /* Custom font setup (Inter) */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--color-light-bg); 
-            color: #1f2937; /* Dark text */
+            background-color: var(--color-background); 
+            color: var(--color-dark-text); 
             scroll-behavior: smooth;
         }
 
-        /* Styling for the custom 'ZG' Logo */
-        .logo-zg-mark {
-            stroke-width: 2.5;
-            transition: all 0.3s ease;
+        /* Utility classes for smooth transitions */
+        .transition-all-smooth {
+            transition: all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* --- Logo Styling --- */
+        .logo-text-primary { font-weight: 900; text-transform: uppercase; }
+        .logo-text-secondary { font-weight: 300; letter-spacing: 0.05em; }
+
+        /* --- Navigation Bar Active Link --- */
+        .nav-link.active {
+            color: var(--color-primary-dark);
+            font-weight: 700;
+            position: relative;
+        }
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            height: 4px; 
+            background-color: var(--color-primary);
+            border-radius: 2px;
+            opacity: 1;
+        }
+
+        /* --- Interactive Service Card Effect (3D Lift) --- */
+        .service-card {
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -2px rgba(0, 0, 0, 0.1);
+            transition: transform 0.4s, box-shadow 0.4s;
+        }
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 25px -5px rgba(79, 70, 229, 0.2), 0 10px 10px -5px rgba(79, 70, 229, 0.1);
+        }
+
+        /* --- Hero Section Background/Overlay for High Quality Look --- */
+        .hero-bg {
+            background-image: src=('hero.png');
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            height: 700px;
+        }
+        .hero-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            /* Dark gradient overlay for high contrast text readability */
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(30, 41, 59, 0.6) 100%);
+            z-index: 10;
+            border-radius: 2rem;
+        }
+        .hero-content {
+            z-index: 20;
         }
         
-        /* High-impact text styling for the company name */
-        .logo-text-primary {
-            letter-spacing: 0.05em;
-            font-weight: 700;
-            text-transform: uppercase;
+        /* --- Footer Input Styling --- */
+        .footer-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 0.75rem;
+            border: 1px solid #4b5563; 
+            background-color: #1f2937; 
+            color: white;
+            transition: all 0.2s;
         }
-
-        /* Utility class for smooth transitions */
-        .transition-all-smooth {
-            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        /* Active navigation link styling (Underline effect) */
-        .nav-link.active {
-            border-bottom: 3px solid var(--color-primary);
-            color: var(--color-primary-dark);
-            font-weight: 600;
-            padding-bottom: 1.55rem; 
-        }
-
-        /* Custom Hero Section Styling (Subtle Tech Grid Background) */
-        .hero-bg {
-            background-color: #ffffff;
-            /* Subtly darkened radial gradient for depth */
-            background-image: radial-gradient(circle at 10% 20%, rgba(255, 255, 255, 1) 0%, rgba(243, 244, 246, 1) 90%);
+        .footer-input:focus {
+            outline: none;
+            border-color: #6366f1; 
+            box-shadow: 0 0 0 2px rgba(99, 102, 241, 0.5);
         }
     </style>
 </head>
 <body class="min-h-screen">
 
-    <!-- Header & Navigation (Elevated Sticky Bar) -->
-    <header class="sticky top-0 z-50 bg-white/90 backdrop-blur-sm shadow-xl shadow-gray-100 border-b border-indigo-50 transition-all-smooth">
+    <!-- Header & Navigation (Sticky and Professional) -->
+    <header class="sticky top-0 z-50 bg-slate-50/95 backdrop-blur-md shadow-lg border-b border-indigo-100 transition-all-smooth">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-stretch h-20">
-                <!-- Logo: ZORIX GLOBAL (ZG) -->
-                <a href="#home" class="flex items-center space-x-2 transition-all hover:opacity-90" onclick="navigateTo('home')">
-                    <!-- ZG Monogram SVG -->
-                    <svg class="h-9 w-9 text-indigo-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <!-- Stylized Z and G overlap, slightly bolder line -->
-                        <path class="logo-zg-mark" d="M3 4L12 4L12 11M12 11L3 11L3 18" stroke-linecap="round" stroke-linejoin="round"/>
-                        <circle class="logo-zg-mark" cx="16" cy="16" r="5" stroke-linecap="round"/>
+            <div class="flex justify-between items-stretch h-24">
+                <!-- Logo: ZORIX GLOBAL (High Quality) -->
+                <a href="#home" class="flex items-center space-x-2 transition-all hover:opacity-80" onclick="navigateTo('home')">
+                    <!-- High-Quality ZG Monogram SVG -->
+                    <svg class="h-10 w-10 text-indigo-700" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.5" opacity="0.2"/>
+                        <path d="M8 12L24 20M24 12L8 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                        <rect x="15" y="15" width="2" height="2" rx="1" fill="#4f46e5"/>
                     </svg>
-                    <span class="text-2xl logo-text-primary text-gray-900">ZORIX</span>
-                    <span class="text-2xl font-light text-indigo-600 tracking-wider">GLOBAL</span>
+                    <span class="text-3xl logo-text-primary text-slate-900">ZORIX</span>
+                    <span class="text-3xl logo-text-secondary text-indigo-700 tracking-wider">GLOBAL</span>
                 </a>
 
                 <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-10 items-center h-full">
-                    <a href="#home" class="nav-link h-full flex items-center text-gray-700 hover:text-indigo-600 transition-all-smooth text-sm uppercase" data-page="home">HOME</a>
-                    <a href="#about" class="nav-link h-full flex items-center text-gray-700 hover:text-indigo-600 transition-all-smooth text-sm uppercase" data-page="about">ABOUT US</a>
-                    <a href="#contact" class="nav-link h-full flex items-center text-gray-700 hover:text-indigo-600 transition-all-smooth text-sm uppercase" data-page="contact">CONTACT</a>
+                <nav class="hidden md:flex space-x-12 items-center h-full">
+                    <a href="#home" class="nav-link h-full flex items-center text-slate-700 hover:text-indigo-700 transition-all-smooth text-base uppercase font-medium" data-page="home">HOME</a>
+                    <a href="#process" class="nav-link h-full flex items-center text-slate-700 hover:text-indigo-700 transition-all-smooth text-base uppercase font-medium" data-page="process">PROCESS</a>
+                    <a href="#about" class="nav-link h-full flex items-center text-slate-700 hover:text-indigo-700 transition-all-smooth text-base uppercase font-medium" data-page="about">ABOUT US</a>
+                    <a href="#contact" class="nav-link h-full flex items-center text-slate-700 hover:text-indigo-700 transition-all-smooth text-base uppercase font-medium" data-page="contact">CONTACT</a>
                 </nav>
 
                 <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" class="md:hidden text-gray-500 hover:text-indigo-600 p-2 rounded-md transition-all-smooth">
+                <button id="mobile-menu-button" class="md:hidden text-slate-700 hover:text-indigo-700 p-2 rounded-md transition-all-smooth">
                     <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
                 </button>
             </div>
         </div>
 
         <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl border-t border-gray-100">
+        <div id="mobile-menu" class="hidden md:hidden bg-slate-50 shadow-xl border-t border-indigo-100">
             <div class="pt-2 pb-3 space-y-1 px-4">
-                <a href="#home" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition-all-smooth" data-page="home">Home</a>
-                <a href="#about" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition-all-smooth" data-page="about">About Us</a>
-                <a href="#contact" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-gray-700 hover:bg-indigo-50 hover:text-indigo-700 transition-all-smooth" data-page="contact">Contact</a>
+                <a href="#home" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-indigo-100 hover:text-indigo-700 transition-all-smooth" data-page="home">Home</a>
+                <a href="#process" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-indigo-100 hover:text-indigo-700 transition-all-smooth" data-page="process">Process</a>
+                <a href="#about" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-indigo-100 hover:text-indigo-700 transition-all-smooth" data-page="about">About Us</a>
+                <a href="#contact" class="nav-link block px-3 py-2 rounded-lg text-base font-medium text-slate-700 hover:bg-indigo-100 hover:text-indigo-700 transition-all-smooth" data-page="contact">Contact</a>
             </div>
         </div>
     </header>
 
     <!-- Main Content Area -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-16">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 lg:py-20">
         
         <!-- ==================================== -->
-        <!-- HOME PAGE SECTION -->
+        <!-- HOME PAGE SECTION (Professional & Interactive Hero) -->
         <!-- ==================================== -->
-        <section id="home" class="page-content space-y-20">
+        <section id="home" class="page-content space-y-24">
             
-            <!-- Hero Section - High-Impact Split Layout -->
-            <div class="hero-bg rounded-3xl shadow-2xl shadow-indigo-200/50 overflow-hidden border border-gray-200">
-                <div class="grid grid-cols-1 lg:grid-cols-5 items-center">
+            <!-- Hero Section - High Contrast & Integrated Image -->
+            <div class="hero-bg rounded-3xl shadow-2xl flex items-center transition-all-smooth">
+                <div class="hero-content p-8 md:p-16 lg:p-24 flex flex-col justify-center text-white">
+                    <p class="text-lg font-semibold text-indigo-300 uppercase tracking-widest mb-4">Strategic Sourcing. Mission-Critical Supply.</p>
+                    <h1 class="text-5xl sm:text-7xl lg:text-8xl font-extrabold mb-8 leading-tight tracking-tighter" style="text-shadow: 0 4px 6px rgba(0, 0, 0, 0.4);">
+                        SECURE YOUR <span class="text-indigo-400">GLOBAL</span> <br class="hidden sm:inline"> SUPPLY CHAIN.
+                    </h1>
+                    <p class="text-xl text-indigo-100 mb-12 max-w-2xl font-light">
+                        Zorix Global provides validated, high-volume B2B trading solutions for premium IT equipment, network infrastructure, and consumer electronics from our strategic UAE hub.
+                    </p>
                     
-                    <!-- Text Content (3/5 width on Desktop) -->
-                    <div class="p-8 md:p-12 lg:p-16 flex flex-col justify-center lg:col-span-3">
-                         <p class="text-lg font-semibold text-indigo-700 uppercase tracking-wider mb-3">B2B Technology Sourcing & Trade</p>
-                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold text-gray-900 mb-6 leading-tight">
-                            Elevating Global <span class="text-indigo-600">IT & Electronics</span> Trading.
-                        </h1>
-                        <p class="text-xl text-gray-600 mb-10 max-w-xl font-light">
-                            Zorix Global is the strategic, reliable trading partner in the UAE you can trust for high-volume supply chain excellence in enterprise hardware and consumer tech.
-                        </p>
-                        <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center justify-center w-full sm:w-auto px-12 py-4 border border-transparent text-lg font-bold rounded-full shadow-xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all-smooth transform hover:scale-[1.03] focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-70">
-                            Start a B2B Inquiry
-                            <i data-lucide="ChevronRight" class="w-5 h-5 ml-2"></i>
-                        </a>
-                    </div>
-                    
-                    <!-- Image/Visual (2/5 width on Desktop) -->
-                    <div class="lg:col-span-2 bg-indigo-700 p-8 lg:p-0">
-                        <!-- Abstract Tech Background Placeholder Image -->
-                        <img class="object-cover w-full h-full lg:h-[550px]" 
-                             src="https://placehold.co/800x800/221c5f/a78bfa?text=ZORIX+TECH+SUPPLY" 
-                             alt="Abstract circuit board design representing high-tech trading">
-                    </div>
+                    <!-- Interactive Call-to-Action Button -->
+                    <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center justify-center w-full sm:w-auto px-12 py-4 border border-transparent text-lg font-bold rounded-full shadow-2xl text-white bg-indigo-600 hover:bg-indigo-700 transition-all-smooth transform hover:scale-[1.03] focus:outline-none focus:ring-4 focus:ring-indigo-400 focus:ring-opacity-70">
+                        Request Procurement Quote
+                        <i data-lucide="ArrowRight" class="w-5 h-5 ml-3"></i>
+                    </a>
                 </div>
             </div>
 
-            <!-- Core Services Section (Grid with Hover Effects) -->
-            <div class="py-4 lg:py-8">
-                <h2 class="text-4xl font-extrabold text-gray-900 text-center mb-16">Our Core Trading Segments</h2>
+            <!-- Core Services Section (Interactive Cards) -->
+            <div class="py-8 lg:py-12">
+                <h2 class="text-5xl font-extrabold text-slate-900 text-center mb-16">Core Trading Segments</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 lg:gap-12">
                     
-                    <!-- Service 1: IT Equipment Trading -->
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-transparent hover:border-indigo-600 transition-all-smooth group transform hover:scale-[1.02] hover:shadow-2xl">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-100 text-indigo-600 mb-5 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                    <!-- Service 1: IT Equipment Trading (Interactive Card) -->
+                    <div class="service-card bg-white p-10 rounded-2xl border border-gray-100 group">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-50 text-indigo-700 mb-6 transition-colors group-hover:bg-indigo-700 group-hover:text-white">
                             <i data-lucide="Server" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Enterprise Hardware</h3>
-                        <p class="text-gray-600 text-base">Reliable distribution of servers, networking equipment, storage arrays, and high-performance IT infrastructure.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-slate-900">Enterprise Hardware</h3>
+                        <p class="text-slate-600 text-base">Reliable distribution of servers, networking equipment, storage arrays, and high-performance IT infrastructure.</p>
                     </div>
 
-                    <!-- Service 2: Consumer Electronics -->
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-transparent hover:border-indigo-600 transition-all-smooth group transform hover:scale-[1.02] hover:shadow-2xl">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-100 text-indigo-600 mb-5 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                    <!-- Service 2: Consumer Electronics (Interactive Card) -->
+                    <div class="service-card bg-white p-10 rounded-2xl border border-gray-100 group">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-50 text-indigo-700 mb-6 transition-colors group-hover:bg-indigo-700 group-hover:text-white">
                             <i data-lucide="Smartphone" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Consumer Electronics</h3>
-                        <p class="text-gray-600 text-base">High-volume supply of modern gadgets, smart devices, laptops, and premium audio/visual equipment.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-slate-900">Consumer Electronics</h3>
+                        <p class="text-slate-600 text-base">High-volume supply of modern gadgets, smart devices, laptops, and premium audio/visual equipment.</p>
                     </div>
 
-                    <!-- Service 3: Computer Parts & Accessories -->
-                    <div class="bg-white p-8 rounded-2xl shadow-xl border-t-4 border-transparent hover:border-indigo-600 transition-all-smooth group transform hover:scale-[1.02] hover:shadow-2xl">
-                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-100 text-indigo-600 mb-5 transition-colors group-hover:bg-indigo-600 group-hover:text-white">
+                    <!-- Service 3: Computer Parts & Accessories (Interactive Card) -->
+                    <div class="service-card bg-white p-10 rounded-2xl border border-gray-100 group">
+                        <div class="flex items-center justify-center h-16 w-16 rounded-full bg-indigo-50 text-indigo-700 mb-6 transition-colors group-hover:bg-indigo-700 group-hover:text-white">
                             <i data-lucide="Chip" class="w-8 h-8"></i>
                         </div>
-                        <h3 class="text-2xl font-bold mb-3 text-gray-900">Components & Accessories</h3>
-                        <p class="text-gray-600 text-base">Consistent wholesale trade of CPUs, GPUs, memory, storage modules, and essential peripherals.</p>
+                        <h3 class="text-2xl font-bold mb-3 text-slate-900">Components & Accessories</h3>
+                        <p class="text-slate-600 text-base">Consistent wholesale trade of CPUs, GPUs, memory, storage modules, and essential peripherals.</p>
                     </div>
 
                 </div>
             </div>
-
-            <!-- Key Highlights Section (Trust Builders) -->
-            <div class="py-12 bg-white rounded-2xl shadow-xl border border-gray-100">
-                <div class="text-center mb-16">
-                    <h2 class="text-4xl font-extrabold text-gray-900">The Zorix Global Advantage</h2>
-                    <p class="mt-4 text-xl text-gray-500 max-w-3xl mx-auto">
-                        Building trust through stringent quality control, strategic logistics, and unparalleled B2B service.
-                    </p>
-                </div>
+            
+        </section>
+        
+        <!-- ==================================== -->
+        <!-- NEW INTERACTIVE SECTION: TRADING PROCESS -->
+        <!-- ==================================== -->
+        <section id="process" class="page-content hidden space-y-16 py-8">
+            <div class="text-center">
+                <h1 class="text-5xl font-extrabold text-slate-900 mb-4">Our Streamlined Trading Process</h1>
+                <p class="text-xl text-slate-500">Transparency and efficiency are built into every B2B transaction.</p>
+            </div>
+            
+            <div class="relative py-12">
+                <!-- Vertical timeline line -->
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-indigo-200 hidden lg:block"></div>
                 
-                <div class="grid grid-cols-1 sm:grid-cols-3 gap-8 px-4 sm:px-12">
+                <div class="space-y-16">
                     
-                    <!-- Highlight 1: Quality -->
-                    <div class="text-center p-6 border border-gray-200 rounded-xl hover:bg-indigo-50 transition-all-smooth">
-                        <i data-lucide="Award" class="w-14 h-14 text-indigo-600 mx-auto mb-4"></i>
-                        <h4 class="text-xl font-bold text-gray-800 mb-2">Unwavering Quality</h4>
-                        <p class="text-gray-600 text-base">Every product is verified for authenticity and adheres to strict quality assurance protocols before shipment.</p>
+                    <!-- Step 1: Inquiry -->
+                    <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full">
+                        <div class="lg:w-5/12 p-6 bg-white rounded-2xl shadow-xl border border-indigo-50 hover:shadow-indigo-200 transition-all-smooth service-card text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-indigo-700 mb-2">1. Procurement Inquiry</h3>
+                            <p class="text-slate-600">You submit your specific B2B requirement (product, volume, timeline) via our contact form.</p>
+                        </div>
+                        <div class="hidden lg:flex w-2/12 justify-center">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-lg font-bold shadow-xl border-4 border-white transition-all-smooth">
+                                <i data-lucide="ClipboardList" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <div class="lg:w-5/12 hidden lg:block"></div>
                     </div>
 
-                    <!-- Highlight 2: Sourcing -->
-                    <div class="text-center p-6 border border-gray-200 rounded-xl hover:bg-indigo-50 transition-all-smooth">
-                        <i data-lucide="Network" class="w-14 h-14 text-indigo-600 mx-auto mb-4"></i>
-                        <h4 class="text-xl font-bold text-gray-800 mb-2">Global Sourcing Network</h4>
-                        <p class="text-gray-600 text-base">An extensive, strategic global network ensures supply consistency and highly competitive pricing for our clients.</p>
+                    <!-- Step 2: Quote & Validation -->
+                    <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full">
+                        <div class="lg:w-5/12 hidden lg:block"></div>
+                        <div class="hidden lg:flex w-2/12 justify-center">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-lg font-bold shadow-xl border-4 border-white transition-all-smooth">
+                                <i data-lucide="ReceiptText" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <div class="lg:w-5/12 p-6 bg-white rounded-2xl shadow-xl border border-indigo-50 hover:shadow-indigo-200 transition-all-smooth service-card text-center lg:text-left">
+                            <h3 class="text-2xl font-bold text-indigo-700 mb-2">2. Quote & Validation</h3>
+                            <p class="text-slate-600">Our team validates availability, prepares a transparent quote, and confirms all sourcing details.</p>
+                        </div>
                     </div>
 
-                    <!-- Highlight 3: Logistics (Fast Delivery) -->
-                    <div class="text-center p-6 border border-gray-200 rounded-xl hover:bg-indigo-50 transition-all-smooth">
-                        <i data-lucide="Rocket" class="w-14 h-14 text-indigo-600 mx-auto mb-4"></i>
-                        <h4 class="text-xl font-bold text-gray-800 mb-2">Rapid SAIF Zone Logistics</h4>
-                        <p class="text-gray-600 text-base">Streamlined, fast-track delivery processes leveraging our optimized position in the Sharjah Free Zone.</p>
+                    <!-- Step 3: Logistics & Delivery -->
+                    <div class="flex flex-col lg:flex-row items-center justify-center lg:justify-between w-full">
+                        <div class="lg:w-5/12 p-6 bg-white rounded-2xl shadow-xl border border-indigo-50 hover:shadow-indigo-200 transition-all-smooth service-card text-center lg:text-right">
+                            <h3 class="text-2xl font-bold text-indigo-700 mb-2">3. Secure Logistics</h3>
+                            <p class="text-slate-600">Upon confirmation, we manage all freight, customs, and documentation from the SAIF Zone hub.</p>
+                        </div>
+                        <div class="hidden lg:flex w-2/12 justify-center">
+                            <div class="w-12 h-12 bg-indigo-600 rounded-full flex items-center justify-center text-white text-lg font-bold shadow-xl border-4 border-white transition-all-smooth">
+                                <i data-lucide="Plane" class="w-6 h-6"></i>
+                            </div>
+                        </div>
+                        <div class="lg:w-5/12 hidden lg:block"></div>
                     </div>
+
                 </div>
             </div>
             
@@ -220,57 +284,49 @@
         <!-- ==================================== -->
         <section id="about" class="page-content hidden space-y-16 py-8">
             <div class="text-center">
-                <h1 class="text-5xl font-extrabold text-gray-900 mb-4">Pillars of Our Corporate Vision</h1>
-                <p class="text-xl text-gray-500">How Zorix Global became a leader in regional technology trade.</p>
+                <h1 class="text-5xl font-extrabold text-slate-900 mb-4">Pillars of Our Corporate Vision</h1>
+                <p class="text-xl text-slate-500">How Zorix Global became a leader in regional technology trade.</p>
             </div>
 
-            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-gray-200 space-y-10">
+            <div class="bg-white p-8 md:p-12 rounded-3xl shadow-xl border border-gray-200 space-y-12">
                 
                 <!-- Section 1: Vision -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start">
                     <div class="lg:col-span-1 border-l-4 border-indigo-600 pl-4">
                         <h2 class="text-3xl font-bold text-indigo-700 mb-2">Our Corporate Vision</h2>
-                        <p class="text-base font-medium text-gray-500">Mission-critical trade simplified.</p>
+                        <p class="text-base font-medium text-slate-500">Mission-critical trade simplified.</p>
                     </div>
                     <div class="lg:col-span-2">
-                        <p class="text-lg text-gray-700 leading-relaxed">
+                        <p class="text-lg text-slate-700 leading-relaxed">
                             Zorix Global was founded to bridge the gap between complex global sourcing and efficient regional delivery. We operate exclusively within the Business-to-Business sector, serving procurement managers who demand the highest standards of product authenticity, predictable supply chains, and transparent trade practices. We aim to be synonymous with **reliability** in IT and electronics trading.
                         </p>
                     </div>
                 </div>
                 
                 <!-- Section 2: SAIF Zone Advantage -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pt-8 border-t border-gray-100">
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 items-start pt-8 border-t border-gray-100">
                     <div class="lg:col-span-1 border-l-4 border-indigo-600 pl-4">
                         <h2 class="text-3xl font-bold text-indigo-700 mb-2">Strategic SAIF Zone Base</h2>
-                        <p class="text-base font-medium text-gray-500">The core of our operational excellence.</p>
+                        <p class="text-base font-medium text-slate-500">The core of our operational excellence.</p>
                     </div>
                     <div class="lg:col-span-2">
-                        <p class="text-lg text-gray-700 leading-relaxed">
+                        <p class="text-lg text-slate-700 leading-relaxed">
                             Our state-of-the-art logistics hub is located in the **Sharjah Airport International Free Zone (SAIF Zone)**, UAE. This strategic positioning is central to our operational efficiency, allowing for streamlined customs clearance, optimized inventory management, and rapid distribution channels, ensuring fast and reliable access to global markets and the wider GCC region.
                         </p>
                     </div>
                 </div>
-
-                <!-- Section 3: Sourcing -->
-                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 items-start pt-8 border-t border-gray-100">
-                    <div class="lg:col-span-1 border-l-4 border-indigo-600 pl-4">
-                        <h2 class="text-3xl font-bold text-indigo-700 mb-2">Dedication to Sourcing</h2>
-                        <p class="text-base font-medium text-gray-500">Securing supply and value.</p>
-                    </div>
-                    <div class="lg:col-span-2">
-                        <p class="text-lg text-gray-700 leading-relaxed">
-                            Through deep-rooted partnerships with major international manufacturers and global distributors, we maintain access to a consistent, high-volume inventory. Our meticulous quality control process ensures that every item traded by Zorix Global is genuine, brand-new, and ready for integration into your enterprise infrastructure or retail chain.
-                        </p>
-                    </div>
-                </div>
             </div>
-
-            <div class="mt-12 text-center">
-                <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center justify-center px-10 py-3 border border-transparent text-lg font-medium rounded-full shadow-lg text-indigo-600 bg-white hover:bg-indigo-50 hover:border-indigo-600 transition-all-smooth focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-50">
-                    Connect with Our Trading Desk
+            
+            <div class="bg-gray-900 text-white p-12 md:p-16 rounded-2xl shadow-2xl shadow-gray-900/50 flex flex-col md:flex-row justify-between items-center space-y-6 md:space-y-0">
+                <div class="max-w-xl text-center md:text-left">
+                    <h3 class="text-4xl font-extrabold leading-tight mb-2">Ready to Secure Your Supply Chain?</h3>
+                    <p class="text-lg text-gray-400">Talk directly to our B2B procurement specialists today.</p>
+                </div>
+                <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center px-10 py-4 border-2 border-white text-base font-bold rounded-full text-white bg-transparent hover:bg-white hover:text-gray-900 transition-all-smooth">
+                    Get an Immediate Quote
                 </a>
             </div>
+
         </section>
 
         <!-- ==================================== -->
@@ -278,37 +334,37 @@
         <!-- ==================================== -->
         <section id="contact" class="page-content hidden space-y-16 py-8">
             <div class="text-center">
-                <h1 class="text-5xl font-extrabold text-gray-900 mb-4">Partner With Us</h1>
-                <p class="text-xl text-gray-500">Reach out to start a discussion about your technology procurement needs.</p>
+                <h1 class="text-5xl font-extrabold text-slate-900 mb-4">Partner With Us</h1>
+                <p class="text-xl text-slate-500">Reach out to start a discussion about your technology procurement needs.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-10">
 
                 <!-- Contact Form (Clean and Optimized) -->
-                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-2xl border border-gray-100">
-                    <h2 class="text-3xl font-semibold text-gray-800 mb-8 border-b pb-3">B2B Supply Inquiry Form</h2>
+                <div class="bg-white p-8 md:p-10 rounded-2xl shadow-xl border border-gray-100">
+                    <h2 class="text-3xl font-semibold text-slate-800 mb-8 border-b pb-3">B2B Supply Inquiry Form</h2>
                     <form onsubmit="handleFormSubmit(event)">
                         <div class="space-y-6">
                             <div>
-                                <label for="name" class="block text-sm font-medium text-gray-700 mb-1">Company / Representative Name</label>
+                                <label for="name" class="block text-sm font-medium text-slate-700 mb-1">Company / Representative Name</label>
                                 <input type="text" id="name" name="name" required 
                                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition-all-smooth" 
                                        placeholder="Your Company Name">
                             </div>
                             <div>
-                                <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Official Business Email</label>
+                                <label for="email" class="block text-sm font-medium text-slate-700 mb-1">Official Business Email</label>
                                 <input type="email" id="email" name="email" required 
                                        class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition-all-smooth" 
                                        placeholder="procurement@yourcompany.com">
                             </div>
                             <div>
-                                <label for="message" class="block text-sm font-medium text-gray-700 mb-1">Detailed Requirement</label>
+                                <label for="message" class="block text-sm font-medium text-slate-700 mb-1">Detailed Requirement</label>
                                 <textarea id="message" name="message" rows="5" required 
                                           class="w-full px-5 py-3 border border-gray-300 rounded-xl focus:ring-indigo-500 focus:border-indigo-500 transition-all-smooth" 
                                           placeholder="Specify product types, required volume, and preferred delivery schedule..."></textarea>
                             </div>
                         </div>
-                        <button type="submit" class="w-full mt-8 px-8 py-4 border border-transparent text-lg font-bold rounded-full shadow-lg text-white bg-indigo-600 hover:bg-indigo-700 transition-all-smooth focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-70">
+                        <button type="submit" class="w-full mt-8 px-8 py-4 border border-transparent text-lg font-bold rounded-full shadow-lg text-white bg-indigo-700 hover:bg-indigo-800 transition-all-smooth focus:outline-none focus:ring-4 focus:ring-indigo-500 focus:ring-opacity-70">
                             Submit Request
                             <i data-lucide="Send" class="w-5 h-5 ml-2 inline-block"></i>
                         </button>
@@ -325,35 +381,35 @@
                     
                     <!-- Details Card (Professional List) -->
                     <div class="bg-white p-8 rounded-2xl shadow-xl border border-gray-100 space-y-6">
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Official Details</h3>
+                        <h3 class="text-2xl font-bold text-slate-800 mb-4">Official Details</h3>
                         
-                        <div class="flex items-center space-x-4">
-                            <i data-lucide="MapPin" class="w-6 h-6 text-indigo-600 flex-shrink-0"></i>
+                        <div class="flex items-start space-x-4">
+                            <i data-lucide="MapPin" class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1"></i>
                             <div>
-                                <span class="font-semibold text-gray-800 block">Headquarters Location</span>
-                                <p class="text-gray-600">Sharjah Airport International Free Zone (SAIF Zone), UAE</p>
+                                <span class="font-semibold text-slate-800 block">Headquarters Location</span>
+                                <p class="text-slate-600">Sharjah Airport International Free Zone (SAIF Zone), UAE</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <i data-lucide="Mail" class="w-6 h-6 text-indigo-600 flex-shrink-0"></i>
+                        <div class="flex items-start space-x-4 pt-4 border-t border-gray-100">
+                            <i data-lucide="Mail" class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1"></i>
                             <div>
-                                <span class="font-semibold text-gray-800 block">General Trade Inquiries</span>
+                                <span class="font-semibold text-slate-800 block">General Trade Inquiries</span>
                                 <a href="mailto:trade@zorixglobal.com" class="text-indigo-600 font-medium hover:underline transition-colors">trade@zorixglobal.com</a>
                             </div>
                         </div>
 
-                        <div class="flex items-center space-x-4 pt-4 border-t border-gray-100">
-                            <i data-lucide="Phone" class="w-6 h-6 text-indigo-600 flex-shrink-0"></i>
+                        <div class="flex items-start space-x-4 pt-4 border-t border-gray-100">
+                            <i data-lucide="Phone" class="w-6 h-6 text-indigo-600 flex-shrink-0 mt-1"></i>
                             <div>
-                                <span class="font-semibold text-gray-800 block">Procurement Direct Line</span>
-                                <p class="text-gray-600">+971 6 XXX XXXX (Placeholder)</p>
+                                <span class="font-semibold text-slate-800 block">Procurement Direct Line</span>
+                                <p class="text-slate-600">+971 6 XXX XXXX (Placeholder)</p>
                             </div>
                         </div>
                     </div>
 
                     <!-- Google Maps Embed -->
-                    <div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200 h-64 w-full">
+                    <div class="rounded-2xl overflow-hidden shadow-xl border border-gray-200 h-80 w-full">
                         <iframe 
                             src="https://maps.google.com/maps?q=Sharjah%20Airport%20International%20Free%20Zone%20(SAIF%20Zone)&t=&z=13&ie=UTF8&iwloc=&output=embed" 
                             width="100%" 
@@ -370,65 +426,76 @@
 
     </main>
 
-    <!-- Footer (Robust and Professional) -->
-    <footer class="bg-gray-900 text-white mt-20 border-t-8 border-indigo-600">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-16">
+    <!-- Footer (Robust and Dark Themed) -->
+    <footer class="bg-slate-900 text-white mt-20 border-t-8 border-indigo-600">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
             
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-10 mb-12">
+            <div class="grid grid-cols-2 lg:grid-cols-5 gap-12 lg:gap-8 mb-16 border-b border-slate-800 pb-12">
                 
-                <!-- Logo & Mission -->
-                <div class="col-span-2 md:col-span-1 space-y-4">
+                <!-- Col 1: Logo & Mission -->
+                <div class="col-span-2 lg:col-span-2 space-y-4">
                     <div class="flex items-center space-x-2">
                         <!-- ZG Monogram Footer -->
-                        <svg class="h-8 w-8 text-indigo-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                            <path class="logo-zg-mark" d="M3 4L12 4L12 11M12 11L3 11L3 18" stroke-linecap="round" stroke-linejoin="round"/>
-                            <circle class="logo-zg-mark" cx="16" cy="16" r="5" stroke-linecap="round"/>
+                        <svg class="h-8 w-8 text-indigo-400" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.5" opacity="0.2"/>
+                            <path d="M8 12L24 20M24 12L8 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+                            <rect x="15" y="15" width="2" height="2" rx="1" fill="#6366f1"/>
                         </svg>
                         <span class="text-2xl logo-text-primary text-white">ZORIX</span>
-                        <span class="text-2xl font-light text-indigo-400 tracking-wider">GLOBAL</span>
+                        <span class="text-2xl logo-text-secondary text-indigo-400 tracking-wider">GLOBAL</span>
                     </div>
-                    <p class="text-sm text-gray-400">The premier B2B partner for reliable IT and electronics trade, based in the strategic hub of Sharjah, UAE.</p>
+                    <p class="text-sm text-slate-400 max-w-sm">The premier B2B partner for reliable IT and electronics trade, based in the strategic hub of Sharjah, UAE.</p>
+                    <div class="flex space-x-6 pt-3">
+                        <a href="#" class="text-slate-500 hover:text-indigo-400 transition-colors" aria-label="LinkedIn Placeholder"><i data-lucide="Linkedin" class="w-6 h-6"></i></a>
+                        <a href="#" class="text-slate-500 hover:text-indigo-400 transition-colors" aria-label="Twitter Placeholder"><i data-lucide="Twitter" class="w-6 h-6"></i></a>
+                    </div>
                 </div>
                 
-                <!-- Quick Links -->
+                <!-- Col 2: Quick Links -->
                 <div class="space-y-4">
-                    <h5 class="text-lg font-bold text-white border-b-2 border-indigo-600 pb-1 inline-block">Quick Links</h5>
+                    <h5 class="text-lg font-bold text-white mb-4 uppercase tracking-wider">Navigation</h5>
                     <ul class="space-y-3 text-sm">
-                        <li><a href="#home" onclick="navigateTo('home')" class="text-gray-400 hover:text-indigo-400 transition-colors">Home</a></li>
-                        <li><a href="#about" onclick="navigateTo('about')" class="text-gray-400 hover:text-indigo-400 transition-colors">About Us</a></li>
-                        <li><a href="#contact" onclick="navigateTo('contact')" class="text-gray-400 hover:text-indigo-400 transition-colors">Contact</a></li>
+                        <li><a href="#home" onclick="navigateTo('home')" class="text-slate-400 hover:text-indigo-400 transition-colors">Home</a></li>
+                        <li><a href="#process" onclick="navigateTo('process')" class="text-slate-400 hover:text-indigo-400 transition-colors">Process</a></li>
+                        <li><a href="#about" onclick="navigateTo('about')" class="text-slate-400 hover:text-indigo-400 transition-colors">About Us</a></li>
+                        <li><a href="#contact" onclick="navigateTo('contact')" class="text-slate-400 hover:text-indigo-400 transition-colors">Contact</a></li>
                     </ul>
                 </div>
                 
-                <!-- Trading Focus -->
+                <!-- Col 3: Trading Focus -->
                 <div class="space-y-4">
-                    <h5 class="text-lg font-bold text-white border-b-2 border-indigo-600 pb-1 inline-block">Trade Focus</h5>
-                    <ul class="space-y-3 text-sm text-gray-400">
+                    <h5 class="text-lg font-bold text-white mb-4 uppercase tracking-wider">Segments</h5>
+                    <ul class="space-y-3 text-sm text-slate-400">
                         <li>Enterprise Hardware</li>
                         <li>Consumer Technology</li>
-                        <li>Global Sourcing</li>
-                        <li>Regional Logistics (GCC)</li>
+                        <li>Computer Components</li>
+                        <li>Global Logistics (GCC)</li>
                     </ul>
                 </div>
 
-                <!-- Contact & Legal -->
-                <div class="space-y-4">
-                    <h5 class="text-lg font-bold text-white border-b-2 border-indigo-600 pb-1 inline-block">Connect</h5>
-                    <p class="text-sm text-gray-400 flex items-center space-x-2"><i data-lucide="Mail" class="w-4 h-4 text-indigo-400"></i><a href="mailto:trade@zorixglobal.com" class="hover:text-indigo-400">trade@zorixglobal.com</a></p>
-                    <p class="text-sm text-gray-400 flex items-center space-x-2"><i data-lucide="MapPin" class="w-4 h-4 text-indigo-400"></i>SAIF Zone, UAE</p>
-
-                    <!-- Social Icons Placeholder -->
-                    <div class="flex space-x-5 pt-3">
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors" aria-label="LinkedIn Placeholder"><i data-lucide="Linkedin" class="w-6 h-6"></i></a>
-                        <a href="#" class="text-gray-400 hover:text-indigo-400 transition-colors" aria-label="Twitter Placeholder"><i data-lucide="Twitter" class="w-6 h-6"></i></a>
-                    </div>
+                <!-- Col 4: Newsletter/Lead Gen -->
+                <div class="col-span-2 lg:col-span-1 space-y-4">
+                    <h5 class="text-lg font-bold text-white mb-4 uppercase tracking-wider">B2B Updates</h5>
+                    <p class="text-sm text-slate-400">Get insights on market trends and new product inventory.</p>
+                    <form onsubmit="handleFooterSubscribe(event)" class="flex flex-col space-y-3">
+                        <input type="email" placeholder="Business Email" required 
+                               class="footer-input">
+                        <button type="submit" class="px-5 py-3 text-sm font-bold rounded-xl text-white bg-indigo-600 hover:bg-indigo-500 transition-all-smooth">
+                            Subscribe
+                        </button>
+                    </form>
+                    <div id="footer-message" class="text-sm text-green-400 hidden"></div>
                 </div>
 
             </div>
             
             <!-- Bottom Line / Copyright -->
-            <div class="pt-8 border-t border-gray-700 text-center">
-                <p class="text-sm text-gray-500">&copy; 2025 ZORIX GLOBAL. All Rights Reserved. | Strategic B2B Technology Trading in the UAE.</p>
+            <div class="pt-8 text-center md:flex justify-between items-center">
+                <p class="text-sm text-slate-500 order-2 md:order-1">&copy; 2025 ZORIX GLOBAL. All Rights Reserved.</p>
+                <div class="flex justify-center md:justify-start space-x-6 text-sm order-1 md:order-2 mb-4 md:mb-0">
+                    <a href="#" class="text-slate-500 hover:text-indigo-400 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-slate-500 hover:text-indigo-400 transition-colors">Sitemap</a>
+                </div>
             </div>
             
         </div>
@@ -523,6 +590,22 @@
 
             // Clear the form for a clean state
             event.target.reset();
+        }
+
+        // --- Footer Subscription Handling (Client-side Placeholder) ---
+        function handleFooterSubscribe(event) {
+            event.preventDefault();
+            const input = event.target.querySelector('input[type="email"]');
+            const message = document.getElementById('footer-message');
+
+            message.textContent = `Thank you for subscribing with ${input.value}!`;
+            message.classList.remove('hidden');
+            input.value = ''; // Clear input field
+
+            // Hide message after a few seconds
+            setTimeout(() => {
+                message.classList.add('hidden');
+            }, 4000);
         }
 
         // Initialize the page once the DOM is fully loaded
