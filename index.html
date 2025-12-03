@@ -1,16 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ZORIX GLOBAL | Strategic B2B Tech & Electronics Trading Hub</title>
     <meta name="description" content="ZORIX GLOBAL: The professional, reliable choice for B2B IT equipment and consumer electronics trading, operating strategically from Sharjah SAIF Zone, UAE.">
     
-    <!-- Preload critical assets -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     
-    <!-- Load Tailwind CSS with custom config -->
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
@@ -21,179 +20,72 @@
                         'primary-dark': '#3730a3',
                         'secondary': '#0ea5e9',
                         'accent': '#f59e0b',
+                        'slate-950': '#0f172a',
                     },
                     animation: {
                         'float': 'float 6s ease-in-out infinite',
-                        'gradient': 'gradient 8s ease infinite',
-                        'slide-in': 'slideIn 0.5s ease-out',
+                        'gradient-bg': 'gradientBg 8s ease infinite',
                         'pulse-glow': 'pulseGlow 2s ease-in-out infinite',
                     },
                     keyframes: {
                         float: {
                             '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
+                            '50%': { transform: 'translateY(-15px)' },
                         },
-                        gradient: {
+                        gradientBg: {
                             '0%, 100%': { backgroundPosition: '0% 50%' },
                             '50%': { backgroundPosition: '100% 50%' },
                         },
-                        slideIn: {
-                            '0%': { transform: 'translateY(20px)', opacity: 0 },
-                            '100%': { transform: 'translateY(0)', opacity: 1 },
-                        },
                         pulseGlow: {
-                            '0%, 100%': { boxShadow: '0 0 20px rgba(79, 70, 229, 0.5)' },
-                            '50%': { boxShadow: '0 0 40px rgba(79, 70, 229, 0.8)' },
+                            '0%, 100%': { boxShadow: '0 0 15px rgba(79, 70, 229, 0.4)' },
+                            '50%': { boxShadow: '0 0 30px rgba(79, 70, 229, 0.7)' },
                         }
                     },
-                    backgroundImage: {
-                        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-                        'grid-pattern': 'linear-gradient(to right, #f1f5f9 1px, transparent 1px), linear-gradient(to bottom, #f1f5f9 1px, transparent 1px)',
-                    }
                 }
             }
         }
     </script>
-    <!-- Load Lucide Icons -->
-    <script src="https://unpkg.com/lucide@latest"></script>
     
     <style>
-        /* Enhanced custom styles with modern effects */
         :root {
             --color-primary: #4f46e5;
-            --color-primary-dark: #3730a3;
             --color-background: #f8fafc;
-            --color-dark-text: #1e293b;
-            --gradient-primary: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            --gradient-dark: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
         }
-        
-        /* Custom font setup */
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
         
         body {
             font-family: 'Inter', sans-serif;
             background-color: var(--color-background);
-            color: var(--color-dark-text);
-            scroll-behavior: smooth;
             overflow-x: hidden;
         }
 
-        /* Smooth scroll with custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 10px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #f1f5f9;
-        }
-        ::-webkit-scrollbar-thumb {
-            background: var(--gradient-primary);
-            border-radius: 5px;
+        /* Glass morphism effect for Nav */
+        .glass-nav {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
-        /* Advanced animations */
-        .fade-in {
-            opacity: 0;
-            animation: fadeIn 0.8s ease forwards;
-        }
-
-        @keyframes fadeIn {
-            to { opacity: 1; }
-        }
-
-        .stagger-child > * {
-            opacity: 0;
-            transform: translateY(20px);
-            animation: slideUp 0.6s ease forwards;
-        }
-
-        .stagger-child > *:nth-child(1) { animation-delay: 0.1s; }
-        .stagger-child > *:nth-child(2) { animation-delay: 0.2s; }
-        .stagger-child > *:nth-child(3) { animation-delay: 0.3s; }
-        .stagger-child > *:nth-child(4) { animation-delay: 0.4s; }
-        .stagger-child > *:nth-child(5) { animation-delay: 0.5s; }
-
-        @keyframes slideUp {
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Glass morphism effect */
-        .glass {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        /* Grid background pattern */
-        .grid-bg {
-            background-size: 50px 50px;
-            background-image: 
-                linear-gradient(to right, rgba(79, 70, 229, 0.05) 1px, transparent 1px),
-                linear-gradient(to bottom, rgba(79, 70, 229, 0.05) 1px, transparent 1px);
-        }
-
-        /* Modern card with hover 3D effect */
-        .modern-card {
-            transform-style: preserve-3d;
-            transition: transform 0.6s cubic-bezier(0.23, 1, 0.320, 1),
-                        box-shadow 0.6s cubic-bezier(0.23, 1, 0.320, 1);
-        }
-
-        .modern-card:hover {
-            transform: translateY(-10px) rotateX(5deg);
-            box-shadow: 
-                0 25px 50px -12px rgba(79, 70, 229, 0.25),
-                0 0 30px rgba(79, 70, 229, 0.1);
-        }
-
-        /* Custom underline animation */
-        .hover-underline {
-            position: relative;
-        }
-
-        .hover-underline::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: var(--gradient-primary);
-            transition: width 0.3s ease;
-        }
-
-        .hover-underline:hover::after {
-            width: 100%;
-        }
-
-        /* Hero section with animated gradient overlay */
-        .hero-bg {
+        /* Hero section with enhanced background effect */
+        .hero-bg-overlay {
             background-image: url("https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2072&q=80");
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
             position: relative;
             min-height: 90vh;
             border-radius: 2rem;
             overflow: hidden;
         }
 
-        .hero-bg::before {
+        .hero-bg-overlay::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, 
-                rgba(30, 41, 59, 0.9) 0%, 
-                rgba(79, 70, 229, 0.6) 50%, 
-                rgba(30, 41, 59, 0.9) 100%);
-            animation: gradient 8s ease infinite;
+            background: linear-gradient(135deg, rgba(30, 41, 59, 0.95) 0%, rgba(79, 70, 229, 0.6) 50%, rgba(30, 41, 59, 0.95) 100%);
+            animation: gradientBg 8s ease infinite;
             background-size: 200% 200%;
             z-index: 1;
         }
@@ -202,80 +94,89 @@
             z-index: 2;
             position: relative;
         }
-
-        /* Animated floating elements */
-        .floating-element {
-            animation: float 6s ease-in-out infinite;
+        
+        /* Modern card with hover effect (using a class name change) */
+        .modern-card-perfect {
+            transform-style: preserve-3d;
+            transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
         }
 
-        /* Particle effect container */
-        .particles {
+        .modern-card-perfect:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px -5px rgba(79, 70, 229, 0.2), 0 0 20px rgba(79, 70, 229, 0.05);
+        }
+
+        /* Custom underline animation for navigation */
+        .hover-underline::after {
+            content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 0;
+            width: 0;
+            height: 2px;
+            bottom: -4px;
+            left: 0;
+            background-color: var(--color-primary);
+            transition: width 0.3s ease;
         }
 
+        .hover-underline:hover::after {
+            width: 100%;
+        }
+
+        /* Staggered animation classes for scroll reveal effect */
+        .stagger-child > * {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+
+        /* Utility to reveal elements (requires JS observer) */
+        .is-visible > * {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Simplified Particle Styling (JS will handle creation) */
         .particle {
             position: absolute;
             background: rgba(79, 70, 229, 0.1);
             border-radius: 50%;
-            animation: float 15s infinite linear;
+            animation: float 10s infinite linear;
         }
     </style>
 </head>
-<body class="relative grid-bg">
+<body class="relative bg-slate-50">
     
-    <!-- Animated background particles -->
-    <div class="particles" id="particles"></div>
+    <div class="particles absolute inset-0 pointer-events-none z-0" id="particles"></div>
 
-    <!-- Header & Navigation -->
-    <header class="sticky top-0 z-50 glass border-b border-white/10 transition-all duration-300 backdrop-blur-xl">
+    <header class="sticky top-0 z-50 glass-nav transition-all duration-300">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-20">
-                <!-- Logo with animation -->
-                <a href="#home" onclick="navigateTo('home')" 
-                   class="flex items-center space-x-3 group transform transition-all duration-300 hover:scale-105">
+                <a href="#home" aria-label="Zorix Global Home"
+                   class="flex items-center space-x-3 group transform transition-all duration-300 hover:scale-[1.02]">
                     <div class="relative">
-                        <div class="absolute inset-0 bg-primary rounded-full blur-lg opacity-50 group-hover:opacity-70 transition-opacity"></div>
-                        <svg class="relative h-12 w-12 text-white" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <svg class="h-10 w-10 text-primary-dark group-hover:text-primary transition-colors" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M8 12L24 20M24 12L8 20" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
-                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.5" opacity="0.3"/>
+                            <circle cx="16" cy="16" r="14" stroke="currentColor" stroke-width="2.5" opacity="0.1"/>
                         </svg>
                     </div>
                     <div class="flex flex-col">
-                        <span class="text-2xl font-black text-slate-900 tracking-tight">ZORIX</span>
-                        <span class="text-sm font-light text-primary uppercase tracking-widest">GLOBAL</span>
+                        <span class="text-2xl font-black text-slate-950 tracking-tight">ZORIX</span>
+                        <span class="text-sm font-semibold text-primary uppercase tracking-[0.3em] -mt-1">GLOBAL</span>
                     </div>
                 </a>
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex items-center space-x-10">
-                    <a href="#home" data-page="home" 
-                       class="nav-link text-sm font-semibold text-slate-700 hover:text-primary transition-all duration-300 hover-underline uppercase tracking-wider py-2">
-                        Home
-                    </a>
-                    <a href="#process" data-page="process"
-                       class="nav-link text-sm font-semibold text-slate-700 hover:text-primary transition-all duration-300 hover-underline uppercase tracking-wider py-2">
-                        Process
-                    </a>
-                    <a href="#about" data-page="about"
-                       class="nav-link text-sm font-semibold text-slate-700 hover:text-primary transition-all duration-300 hover-underline uppercase tracking-wider py-2">
-                        About
-                    </a>
-                    <a href="#contact" data-page="contact"
-                       class="nav-link text-sm font-semibold text-slate-700 hover:text-primary transition-all duration-300 hover-underline uppercase tracking-wider py-2">
-                        Contact
-                    </a>
-                    <a href="#contact" onclick="navigateTo('contact')"
-                       class="ml-6 px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-bold rounded-full shadow-lg hover:shadow-xl transform hover:-translate-y-0.5 transition-all duration-300">
+                <nav class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="nav-link text-sm font-medium text-slate-700 hover:text-primary transition-colors hover-underline uppercase tracking-wider py-2">Home</a>
+                    <a href="#process" class="nav-link text-sm font-medium text-slate-700 hover:text-primary transition-colors hover-underline uppercase tracking-wider py-2">Process</a>
+                    <a href="#about" class="nav-link text-sm font-medium text-slate-700 hover:text-primary transition-colors hover-underline uppercase tracking-wider py-2">About</a>
+                    <a href="#contact" class="nav-link text-sm font-medium text-slate-700 hover:text-primary transition-colors hover-underline uppercase tracking-wider py-2">Contact</a>
+                    <a href="#contact"
+                       class="ml-4 px-6 py-2.5 bg-gradient-to-r from-primary to-primary-dark text-white text-sm font-bold rounded-full shadow-lg shadow-primary/30 hover:shadow-xl transform hover:scale-[1.03] transition-all duration-300">
                         Get Quote
                     </a>
                 </nav>
 
-                <!-- Mobile Menu Button -->
-                <button id="mobile-menu-button" 
+                <button id="mobile-menu-button" aria-expanded="false" aria-controls="mobile-menu"
                         class="md:hidden p-2 rounded-lg text-slate-700 hover:bg-slate-100 transition-all duration-300">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -284,93 +185,81 @@
             </div>
         </div>
 
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden md:hidden glass border-t border-white/10">
-            <div class="px-4 py-6 space-y-4">
-                <a href="#home" data-page="home"
-                   class="block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-white/50 transition-all duration-300">
-                    Home
-                </a>
-                <a href="#process" data-page="process"
-                   class="block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-white/50 transition-all duration-300">
-                    Process
-                </a>
-                <a href="#about" data-page="about"
-                   class="block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-white/50 transition-all duration-300">
-                    About Us
-                </a>
-                <a href="#contact" data-page="contact"
-                   class="block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-white/50 transition-all duration-300">
-                    Contact
+        <div id="mobile-menu" class="hidden md:hidden glass-nav">
+            <div class="px-4 py-4 space-y-2">
+                <a href="#home" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 transition-all duration-300">Home</a>
+                <a href="#process" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 transition-all duration-300">Process</a>
+                <a href="#about" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 transition-all duration-300">About Us</a>
+                <a href="#contact" class="mobile-nav-link block px-4 py-3 rounded-lg text-base font-medium text-slate-700 hover:bg-slate-100 transition-all duration-300">Contact</a>
+                <a href="#contact" class="mobile-nav-link block w-full text-center py-3 bg-primary text-white font-semibold rounded-lg mt-2">
+                    Get Quote
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
     <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 lg:py-16">
         
-        <!-- HOME SECTION -->
-        <section id="home" class="page-content space-y-20 fade-in">
+        <section id="home" class="space-y-20 pt-4">
             
-            <!-- Hero Section -->
-            <div class="hero-bg flex items-center justify-center text-center overflow-hidden">
+            <div class="hero-bg-overlay flex items-center justify-center text-center">
                 <div class="hero-content px-4 py-20 md:py-32 relative z-10">
-                    <!-- Floating badges -->
-                    <div class="flex justify-center gap-4 mb-8">
-                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-sm font-semibold text-white border border-white/20">
+                    <div class="flex justify-center gap-4 mb-8 stagger-child">
+                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold text-white border border-white/20 transform translate-y-0 opacity-100">
                             <i data-lucide="shield-check" class="w-4 h-4 mr-2"></i> ISO Certified
                         </span>
-                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm text-sm font-semibold text-white border border-white/20">
+                        <span class="inline-flex items-center px-4 py-2 rounded-full bg-white/10 backdrop-blur-md text-sm font-semibold text-white border border-white/20 transform translate-y-0 opacity-100" style="animation-delay: 0.1s;">
                             <i data-lucide="globe" class="w-4 h-4 mr-2"></i> Global Reach
                         </span>
                     </div>
 
-                    <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 leading-tight tracking-tight text-white">
+                    <h1 class="text-5xl sm:text-7xl lg:text-8xl font-black mb-6 leading-none tracking-tight text-white stagger-child">
                         <span class="block">INTELLIGENT</span>
                         <span class="block bg-gradient-to-r from-blue-400 to-purple-400 bg-clip-text text-transparent">TECHNOLOGY</span>
                         <span class="block">SOLUTIONS</span>
                     </h1>
                     
-                    <p class="text-xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed">
-                        We deliver mission-critical IT infrastructure and consumer electronics through strategic B2B partnerships, ensuring reliability, scalability, and competitive advantage for your business.
+                    <p class="text-xl text-white/90 mb-12 max-w-3xl mx-auto font-light leading-relaxed animate-[slide-in_0.5s_ease-out_forwards] delay-500 opacity-0">
+                        We deliver mission-critical IT infrastructure and consumer electronics through strategic B2B partnerships, ensuring **reliability, scalability, and competitive advantage** for your business.
                     </p>
                     
-                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                        <a href="#contact" onclick="navigateTo('contact')"
-                           class="group px-8 py-4 bg-gradient-to-r from-primary to-purple-600 text-white text-lg font-bold rounded-full shadow-2xl hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 inline-flex items-center animate-pulse-glow">
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center stagger-child">
+                        <a href="#contact"
+                           class="group px-8 py-4 bg-gradient-to-r from-primary to-purple-600 text-white text-lg font-bold rounded-full shadow-2xl shadow-purple-600/30 hover:shadow-3xl transform hover:-translate-y-1 transition-all duration-300 inline-flex items-center animate-pulse-glow" style="animation-delay: 0.7s;">
                             Start Partnership
-                            <i data-lucide="arrow-right" class="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform"></i>
+                            <i data-lucide="arrow-right" class="w-5 h-5 ml-3 group-hover:translate-x-1 transition-transform"></i>
                         </a>
-                        <a href="#process" onclick="navigateTo('process')"
-                           class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white text-lg font-semibold rounded-full border-2 border-white/30 hover:bg-white/30 transition-all duration-300">
+                        <a href="#process"
+                           class="px-8 py-4 bg-white/20 backdrop-blur-sm text-white text-lg font-semibold rounded-full border-2 border-white/30 hover:bg-white/30 transition-all duration-300" style="animation-delay: 0.8s;">
                             How We Work
                         </a>
                     </div>
                 </div>
             </div>
 
-            <!-- Stats Section -->
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 py-12">
-                <div class="modern-card bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <div class="text-4xl font-black text-primary mb-2">500+</div>
-                    <div class="text-sm font-semibold text-slate-600 uppercase tracking-wider">Global Partners</div>
+            <div class="h-20"></div><div class="grid grid-cols-2 lg:grid-cols-4 gap-6 py-6 stagger-child is-visible">
+                <div class="modern-card-perfect bg-white p-6 md:p-8 rounded-2xl shadow-lg text-center border border-slate-100">
+                    <i data-lucide="building-2" class="w-8 h-8 text-primary mx-auto mb-2"></i>
+                    <div class="text-3xl md:text-4xl font-black text-primary mb-1">500+</div>
+                    <div class="text-xs md:text-sm font-semibold text-slate-600 uppercase tracking-wider">Global Partners</div>
                 </div>
-                <div class="modern-card bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <div class="text-4xl font-black text-primary mb-2">98%</div>
-                    <div class="text-sm font-semibold text-slate-600 uppercase tracking-wider">On-Time Delivery</div>
+                <div class="modern-card-perfect bg-white p-6 md:p-8 rounded-2xl shadow-lg text-center border border-slate-100" style="animation-delay: 0.1s;">
+                    <i data-lucide="truck" class="w-8 h-8 text-primary mx-auto mb-2"></i>
+                    <div class="text-3xl md:text-4xl font-black text-primary mb-1">98%</div>
+                    <div class="text-xs md:text-sm font-semibold text-slate-600 uppercase tracking-wider">On-Time Delivery</div>
                 </div>
-                <div class="modern-card bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <div class="text-4xl font-black text-primary mb-2">24/7</div>
-                    <div class="text-sm font-semibold text-slate-600 uppercase tracking-wider">Support</div>
+                <div class="modern-card-perfect bg-white p-6 md:p-8 rounded-2xl shadow-lg text-center border border-slate-100" style="animation-delay: 0.2s;">
+                    <i data-lucide="headphones" class="w-8 h-8 text-primary mx-auto mb-2"></i>
+                    <div class="text-3xl md:text-4xl font-black text-primary mb-1">24/7</div>
+                    <div class="text-xs md:text-sm font-semibold text-slate-600 uppercase tracking-wider">Support</div>
                 </div>
-                <div class="modern-card bg-white p-8 rounded-2xl shadow-lg text-center">
-                    <div class="text-4xl font-black text-primary mb-2">50+</div>
-                    <div class="text-sm font-semibold text-slate-600 uppercase tracking-wider">Countries Served</div>
+                <div class="modern-card-perfect bg-white p-6 md:p-8 rounded-2xl shadow-lg text-center border border-slate-100" style="animation-delay: 0.3s;">
+                    <i data-lucide="map" class="w-8 h-8 text-primary mx-auto mb-2"></i>
+                    <div class="text-3xl md:text-4xl font-black text-primary mb-1">50+</div>
+                    <div class="text-xs md:text-sm font-semibold text-slate-600 uppercase tracking-wider">Countries Served</div>
                 </div>
             </div>
 
-            <!-- Core Services -->
             <div class="py-12">
                 <div class="text-center mb-16">
                     <h2 class="text-4xl md:text-5xl font-black text-slate-900 mb-4">Strategic Technology Solutions</h2>
@@ -378,195 +267,211 @@
                 </div>
                 
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8 stagger-child">
-                    <!-- Service 1 -->
-                    <div class="modern-card group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
+                    <div class="modern-card-perfect group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden" style="animation-delay: 0.1s;">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-purple-600"></div>
                         <div class="mb-6">
-                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                                 <i data-lucide="server" class="w-7 h-7 text-primary"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-slate-900 mb-3">Enterprise Infrastructure</h3>
                             <p class="text-slate-600">End-to-end solutions for servers, networking, storage, and data center hardware with certified validation and support.</p>
                         </div>
-                        <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center text-primary font-semibold group">
-                            Request Solutions
-                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                        <a href="#contact" class="inline-flex items-center text-primary font-semibold group">Request Solutions <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i></a>
                     </div>
 
-                    <!-- Service 2 -->
-                    <div class="modern-card group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
+                    <div class="modern-card-perfect group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden" style="animation-delay: 0.2s;">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-purple-600"></div>
                         <div class="mb-6">
-                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                                 <i data-lucide="smartphone" class="w-7 h-7 text-primary"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-slate-900 mb-3">Consumer Electronics</h3>
                             <p class="text-slate-600">High-volume supply of premium gadgets, smart devices, and AV equipment with competitive wholesale pricing.</p>
                         </div>
-                        <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center text-primary font-semibold group">
-                            Explore Catalog
-                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                        <a href="#contact" class="inline-flex items-center text-primary font-semibold group">Explore Catalog <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i></a>
                     </div>
 
-                    <!-- Service 3 -->
-                    <div class="modern-card group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden">
+                    <div class="modern-card-perfect group bg-white p-8 rounded-2xl border border-slate-200 relative overflow-hidden" style="animation-delay: 0.3s;">
                         <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-primary to-purple-600"></div>
                         <div class="mb-6">
-                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+                            <div class="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform duration-300">
                                 <i data-lucide="cpu" class="w-7 h-7 text-primary"></i>
                             </div>
                             <h3 class="text-2xl font-bold text-slate-900 mb-3">Components & Peripherals</h3>
                             <p class="text-slate-600">Comprehensive inventory of CPUs, GPUs, memory, storage, and essential computing accessories.</p>
                         </div>
-                        <a href="#contact" onclick="navigateTo('contact')" class="inline-flex items-center text-primary font-semibold group">
-                            View Inventory
-                            <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i>
-                        </a>
+                        <a href="#contact" class="inline-flex items-center text-primary font-semibold group">View Inventory <i data-lucide="arrow-right" class="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform"></i></a>
                     </div>
                 </div>
             </div>
 
-            <!-- Trusted Partners -->
             <div class="py-12">
                 <div class="text-center mb-12">
-                    <h3 class="text-2xl font-bold text-slate-700 mb-4">Trusted By Industry Leaders</h3>
-                    <div class="flex flex-wrap justify-center items-center gap-12 opacity-50">
-                        <div class="text-2xl font-bold text-slate-400">DELL</div>
-                        <div class="text-2xl font-bold text-slate-400">HP</div>
-                        <div class="text-2xl font-bold text-slate-400">CISCO</div>
-                        <div class="text-2xl font-bold text-slate-400">LENOVO</div>
-                        <div class="text-2xl font-bold text-slate-400">INTEL</div>
+                    <h3 class="text-2xl font-bold text-slate-700 mb-8">Trusted By Industry Leaders</h3>
+                    <div class="flex flex-wrap justify-center items-center gap-x-12 gap-y-6 opacity-60">
+                        <div class="text-2xl font-extrabold text-slate-500 hover:text-primary transition-colors">DELL</div>
+                        <div class="text-2xl font-extrabold text-slate-500 hover:text-primary transition-colors">HP</div>
+                        <div class="text-2xl font-extrabold text-slate-500 hover:text-primary transition-colors">CISCO</div>
+                        <div class="text-2xl font-extrabold text-slate-500 hover:text-primary transition-colors">LENOVO</div>
+                        <div class="text-2xl font-extrabold text-slate-500 hover:text-primary transition-colors">INTEL</div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- PROCESS SECTION -->
-        <section id="process" class="page-content hidden space-y-20 py-12">
-            <!-- Process section content remains similar but enhanced with animations -->
-            <!-- Due to character limit, I'll show the enhanced structure -->
-            <div class="text-center mb-16">
+        <section id="process" class="hidden space-y-20 py-12">
+            <div class="text-center mb-16 stagger-child">
                 <h1 class="text-5xl font-black text-slate-900 mb-6">Our Precision Process</h1>
                 <p class="text-xl text-slate-600 max-w-3xl mx-auto">A streamlined approach to global technology procurement, optimized for speed, transparency, and reliability.</p>
             </div>
             
-            <!-- Animated timeline -->
-            <div class="relative">
-                <!-- Timeline line with gradient -->
-                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-primary via-purple-500 to-primary hidden lg:block"></div>
+            <div class="relative max-w-4xl mx-auto">
+                <div class="absolute left-1/2 transform -translate-x-1/2 h-full w-0.5 bg-slate-200 hidden lg:block">
+                    <div class="absolute w-full h-1/4 top-0 bg-gradient-to-b from-primary via-purple-500 to-transparent animate-pulse-glow" style="animation-duration: 4s;"></div>
+                </div>
                 
-                <div class="space-y-24">
-                    <!-- Step 1 -->
-                    <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+                <div class="space-y-20">
+                    <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8 stagger-child">
                         <div class="lg:w-5/12 lg:text-right lg:order-1 order-2">
-                            <div class="modern-card bg-white p-8 rounded-2xl shadow-xl">
-                                <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary text-white text-2xl font-bold mb-6">
+                            <div class="modern-card-perfect bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary text-xl font-bold mb-4">
                                     01
-                                </div>
+                                </span>
                                 <h3 class="text-2xl font-bold text-slate-900 mb-4">Strategic Consultation</h3>
-                                <p class="text-slate-600">Our experts analyze your requirements and market conditions to develop optimal sourcing strategies.</p>
+                                <p class="text-slate-600">Our experts analyze your requirements and market conditions to develop optimal sourcing strategies. We define scope, quantity, and logistics.</p>
                             </div>
                         </div>
                         <div class="lg:w-2/12 flex justify-center order-1 lg:order-2">
-                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl border-8 border-white animate-pulse">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl border-8 border-white animate-pulse-glow" style="animation-duration: 2s;">
                                 <i data-lucide="search" class="w-8 h-8"></i>
                             </div>
                         </div>
-                        <div class="lg:w-5/12 order-3"></div>
+                        <div class="lg:w-5/12 order-3 hidden lg:block"></div>
                     </div>
 
-                    <!-- Step 2 & 3 similarly enhanced -->
-                    <!-- ... -->
+                    <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+                        <div class="lg:w-5/12 hidden lg:block"></div>
+                        <div class="lg:w-2/12 flex justify-center order-1">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl border-8 border-white animate-pulse-glow" style="animation-duration: 2s; animation-delay: 0.5s;">
+                                <i data-lucide="check-circle-2" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                        <div class="lg:w-5/12 lg:text-left order-2">
+                            <div class="modern-card-perfect bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary text-xl font-bold mb-4">
+                                    02
+                                </span>
+                                <h3 class="text-2xl font-bold text-slate-900 mb-4">Procurement & QC</h3>
+                                <p class="text-slate-600">We leverage our global network for sourcing. All items undergo rigorous quality checks in the SAIF Zone before packaging for transit.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col lg:flex-row items-center lg:items-start gap-8">
+                        <div class="lg:w-5/12 lg:text-right lg:order-1 order-2">
+                            <div class="modern-card-perfect bg-white p-8 rounded-2xl shadow-xl border border-slate-100">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10 text-primary text-xl font-bold mb-4">
+                                    03
+                                </span>
+                                <h3 class="text-2xl font-bold text-slate-900 mb-4">Global Logistics</h3>
+                                <p class="text-slate-600">Efficient, transparent shipment management with real-time tracking, ensuring secure and on-time delivery across international borders.</p>
+                            </div>
+                        </div>
+                        <div class="lg:w-2/12 flex justify-center order-1 lg:order-2">
+                            <div class="w-16 h-16 rounded-full bg-gradient-to-r from-primary to-purple-600 flex items-center justify-center text-white text-2xl font-bold shadow-xl border-8 border-white animate-pulse-glow" style="animation-duration: 2s; animation-delay: 1s;">
+                                <i data-lucide="plane" class="w-8 h-8"></i>
+                            </div>
+                        </div>
+                        <div class="lg:w-5/12 order-3 hidden lg:block"></div>
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- ABOUT SECTION -->
-        <section id="about" class="page-content hidden space-y-20 py-12">
-            <!-- Enhanced about section with interactive elements -->
+        <section id="about" class="hidden space-y-20 py-12">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <div class="space-y-8">
+                <div class="space-y-8 stagger-child">
                     <div>
                         <span class="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary font-semibold text-sm mb-4">ABOUT ZORIX GLOBAL</span>
                         <h1 class="text-5xl font-black text-slate-900 mb-6">Redefining Technology Distribution</h1>
                         <p class="text-lg text-slate-600 leading-relaxed">
-                            Founded on principles of integrity and excellence, Zorix Global has emerged as a premier B2B technology trading partner. Our strategic position in Sharjah's SAIF Zone enables us to serve global markets with unparalleled efficiency.
+                            Founded on principles of integrity and excellence, Zorix Global has emerged as a premier B2B technology trading partner. Our strategic position in **Sharjah's SAIF Zone** enables us to serve global markets with unparalleled efficiency and compliance.
                         </p>
                     </div>
                     
                     <div class="space-y-6">
-                        <div class="flex items-start gap-4">
+                        <div class="flex items-start gap-4 modern-card-perfect p-4 rounded-xl border border-slate-100">
                             <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
                                 <i data-lucide="target" class="w-6 h-6 text-primary"></i>
                             </div>
                             <div>
                                 <h4 class="text-lg font-bold text-slate-900 mb-2">Mission Critical Focus</h4>
-                                <p class="text-slate-600">We specialize in mission-critical technology solutions that power businesses worldwide.</p>
+                                <p class="text-slate-600">We specialize in mission-critical technology solutions that power businesses worldwide, focusing on enterprise-grade hardware.</p>
                             </div>
                         </div>
                         
-                        <div class="flex items-start gap-4">
+                        <div class="flex items-start gap-4 modern-card-perfect p-4 rounded-xl border border-slate-100">
                             <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
-                                <i data-lucide="globe" class="w-6 h-6 text-primary"></i>
+                                <i data-lucide="map-pin" class="w-6 h-6 text-primary"></i>
                             </div>
                             <div>
-                                <h4 class="text-lg font-bold text-slate-900 mb-2">Global Logistics Network</h4>
-                                <p class="text-slate-600">Optimized supply chain management with strategic partnerships across 50+ countries.</p>
+                                <h4 class="text-lg font-bold text-slate-900 mb-2">Sharjah SAIF Zone Hub</h4>
+                                <p class="text-slate-600">Optimized supply chain management from a tax-efficient, strategically-located international logistics hub.</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div class="relative">
-                    <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl">
-                        <div class="w-full h-full bg-gradient-to-br from-primary/20 to-purple-600/20"></div>
+                <div class="relative p-6">
+                    <div class="aspect-square rounded-3xl overflow-hidden shadow-2xl bg-slate-200">
+                         <div class="w-full h-full bg-gradient-to-br from-primary/20 to-purple-600/20 flex items-center justify-center text-slate-700 font-bold">
+                             
+
+[Image of modern server racks in a data center]
+
+                        </div>
                     </div>
-                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-gradient-to-r from-primary to-purple-600 rounded-3xl -z-10 animate-float"></div>
+                    <div class="absolute -bottom-6 -right-6 w-64 h-64 bg-gradient-to-r from-primary to-purple-600 rounded-3xl -z-10 animate-float opacity-70"></div>
                 </div>
             </div>
         </section>
 
-        <!-- CONTACT SECTION -->
-        <section id="contact" class="page-content hidden space-y-20 py-12">
-            <!-- Enhanced contact section with interactive form -->
-            <div class="text-center mb-16">
+        <section id="contact" class="hidden space-y-20 py-12">
+            <div class="text-center mb-16 stagger-child">
                 <h1 class="text-5xl font-black text-slate-900 mb-6">Start Your Partnership</h1>
                 <p class="text-xl text-slate-600 max-w-2xl mx-auto">Connect with our B2B specialists to discuss your technology procurement needs.</p>
             </div>
             
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-                <!-- Interactive contact form -->
-                <div class="modern-card bg-white p-10 rounded-3xl shadow-2xl">
+                <div class="modern-card-perfect bg-white p-6 md:p-10 rounded-3xl shadow-2xl">
                     <form id="contact-form" class="space-y-6">
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 mb-2">Company Name</label>
-                                <input type="text" required 
+                                <label for="companyName" class="block text-sm font-semibold text-slate-700 mb-2">Company Name</label>
+                                <input type="text" id="companyName" required 
                                        class="w-full px-5 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
                                        placeholder="Enter company name">
                             </div>
                             <div>
-                                <label class="block text-sm font-semibold text-slate-700 mb-2">Contact Person</label>
-                                <input type="text" required 
+                                <label for="contactPerson" class="block text-sm font-semibold text-slate-700 mb-2">Contact Person</label>
+                                <input type="text" id="contactPerson" required 
                                        class="w-full px-5 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
                                        placeholder="Your name">
                             </div>
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Business Email</label>
-                            <input type="email" required 
+                            <label for="businessEmail" class="block text-sm font-semibold text-slate-700 mb-2">Business Email</label>
+                            <input type="email" id="businessEmail" required 
                                    class="w-full px-5 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
                                    placeholder="business@email.com">
                         </div>
                         
                         <div>
-                            <label class="block text-sm font-semibold text-slate-700 mb-2">Procurement Requirements</label>
-                            <textarea rows="5" required
-                                      class="w-full px-5 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
-                                      placeholder="Describe your technology needs, volume, and timeline..."></textarea>
+                            <label for="requirements" class="block text-sm font-semibold text-slate-700 mb-2">Procurement Requirements</label>
+                            <textarea id="requirements" rows="5" required
+                                     class="w-full px-5 py-3 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-300"
+                                     placeholder="Describe your technology needs, volume, and timeline..."></textarea>
                         </div>
                         
                         <button type="submit" 
@@ -584,51 +489,38 @@
                     </div>
                 </div>
                 
-                <!-- Contact details with interactive map -->
                 <div class="space-y-8">
-                    <div class="modern-card bg-gradient-to-br from-slate-900 to-slate-800 p-10 rounded-3xl text-white">
-                        <h3 class="text-2xl font-bold mb-8">Get in Touch</h3>
+                    <div class="modern-card-perfect bg-slate-900 p-8 rounded-3xl shadow-2xl text-white">
+                        <h3 class="text-3xl font-bold mb-6 text-primary">UAE Headquarters</h3>
                         
-                        <div class="space-y-6">
+                        <div class="space-y-6 text-slate-300">
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="map-pin" class="w-6 h-6"></i>
-                                </div>
+                                <i data-lucide="map-pin" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
                                 <div>
-                                    <h4 class="font-bold text-lg mb-1">Strategic Headquarters</h4>
-                                    <p class="text-white/80">Sharjah Airport International Free Zone (SAIF Zone), UAE</p>
+                                    <p class="font-semibold text-lg text-white mb-1">Address</p>
+                                    <address class="not-italic">
+                                        ZORIX GLOBAL FZE<br>
+                                        Sharjah Airport Free Zone (SAIF Zone)<br>
+                                        P.O. Box 120257<br>
+                                        Sharjah, United Arab Emirates
+                                    </address>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="mail" class="w-6 h-6"></i>
-                                </div>
+                                <i data-lucide="mail" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
                                 <div>
-                                    <h4 class="font-bold text-lg mb-1">B2B Inquiries</h4>
-                                    <a href="mailto:trade@zorixglobal.com" class="text-primary-300 hover:text-white transition-colors">trade@zorixglobal.com</a>
+                                    <p class="font-semibold text-lg text-white mb-1">Email</p>
+                                    <a href="mailto:info@zorixglobal.com" class="hover:text-primary transition-colors">info@zorixglobal.com</a>
                                 </div>
                             </div>
-                            
+
                             <div class="flex items-start gap-4">
-                                <div class="w-12 h-12 rounded-xl bg-white/10 flex items-center justify-center flex-shrink-0">
-                                    <i data-lucide="phone" class="w-6 h-6"></i>
-                                </div>
+                                <i data-lucide="phone" class="w-6 h-6 text-accent mt-1 flex-shrink-0"></i>
                                 <div>
-                                    <h4 class="font-bold text-lg mb-1">Procurement Hotline</h4>
-                                    <p class="text-white/80">+971 6 XXX XXXX</p>
+                                    <p class="font-semibold text-lg text-white mb-1">Phone</p>
+                                    <a href="tel:+971xxxxxxxx" class="hover:text-primary transition-colors">+971 XXX XXX XXXX</a>
                                 </div>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Interactive map placeholder -->
-                    <div class="modern-card bg-white p-6 rounded-3xl shadow-xl">
-                        <div class="aspect-video rounded-xl bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                            <div class="text-center">
-                                <i data-lucide="map" class="w-12 h-12 text-slate-400 mx-auto mb-4"></i>
-                                <p class="text-slate-600 font-semibold">Strategic Location Map</p>
-                                <p class="text-sm text-slate-500">SAIF Zone, Sharjah, UAE</p>
                             </div>
                         </div>
                     </div>
@@ -637,257 +529,147 @@
         </section>
     </main>
 
-    <!-- Enhanced Footer -->
-    <footer class="bg-gradient-to-b from-slate-900 to-slate-950 text-white mt-32 pt-20 pb-10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-4 gap-12 mb-16">
-                <!-- Company info -->
-                <div class="space-y-6">
-                    <div class="flex items-center gap-3">
-                        <div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center">
-                            <svg class="w-6 h-6 text-white" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2"/>
-                                <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2"/>
-                                <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2"/>
-                            </svg>
-                        </div>
-                        <div>
-                            <div class="text-2xl font-black">ZORIX</div>
-                            <div class="text-sm font-light text-primary-300 uppercase tracking-widest">GLOBAL</div>
-                        </div>
-                    </div>
-                    <p class="text-slate-400 text-sm leading-relaxed">
-                        Premier B2B technology trading partner, delivering mission-critical solutions from our strategic UAE hub.
-                    </p>
-                </div>
-                
-                <!-- Quick links -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Navigation</h4>
-                    <ul class="space-y-3">
-                        <li><a href="#home" onclick="navigateTo('home')" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-                            <i data-lucide="chevron-right" class="w-3 h-3"></i> Home
-                        </a></li>
-                        <li><a href="#process" onclick="navigateTo('process')" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-                            <i data-lucide="chevron-right" class="w-3 h-3"></i> Our Process
-                        </a></li>
-                        <li><a href="#about" onclick="navigateTo('about')" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-                            <i data-lucide="chevron-right" class="w-3 h-3"></i> About Us
-                        </a></li>
-                        <li><a href="#contact" onclick="navigateTo('contact')" class="text-slate-400 hover:text-white transition-colors flex items-center gap-2">
-                            <i data-lucide="chevron-right" class="w-3 h-3"></i> Contact
-                        </a></li>
-                    </ul>
-                </div>
-                
-                <!-- Services -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Services</h4>
-                    <ul class="space-y-3 text-slate-400 text-sm">
-                        <li class="flex items-center gap-2">
-                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                            Enterprise IT Infrastructure
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                            Consumer Electronics
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                            Components Distribution
-                        </li>
-                        <li class="flex items-center gap-2">
-                            <div class="w-1.5 h-1.5 rounded-full bg-primary"></div>
-                            Global Logistics
-                        </li>
-                    </ul>
-                </div>
-                
-                <!-- Newsletter -->
-                <div>
-                    <h4 class="text-lg font-bold mb-6">Stay Updated</h4>
-                    <p class="text-slate-400 text-sm mb-4">Get market insights and new inventory alerts.</p>
-                    <form class="space-y-3">
-                        <input type="email" placeholder="Business email" 
-                               class="w-full px-4 py-3 rounded-lg bg-slate-800 border border-slate-700 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-primary">
-                        <button type="submit" 
-                                class="w-full px-4 py-3 bg-primary hover:bg-primary-dark rounded-lg font-semibold transition-colors">
-                            Subscribe
-                        </button>
-                    </form>
-                </div>
+    <footer class="bg-slate-950 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-400">
+            <div class="flex flex-col md:flex-row justify-center items-center gap-4 mb-6">
+                <a href="#home" class="text-slate-200 hover:text-primary transition-colors">Home</a>
+                <span class="hidden md:block">|</span>
+                <a href="#process" class="text-slate-200 hover:text-primary transition-colors">Process</a>
+                <span class="hidden md:block">|</span>
+                <a href="#about" class="text-slate-200 hover:text-primary transition-colors">About Us</a>
+                <span class="hidden md:block">|</span>
+                <a href="#contact" class="text-slate-200 hover:text-primary transition-colors">Contact</a>
             </div>
-            
-            <!-- Bottom bar -->
-            <div class="pt-8 border-t border-slate-800 flex flex-col md:flex-row justify-between items-center">
-                <div class="text-slate-500 text-sm mb-4 md:mb-0">
-                    © 2025 Zorix Global. All rights reserved.
-                </div>
-                <div class="flex items-center gap-6">
-                    <a href="#" class="text-slate-500 hover:text-white transition-colors text-sm">
-                        Privacy Policy
-                    </a>
-                    <a href="#" class="text-slate-500 hover:text-white transition-colors text-sm">
-                        Terms of Service
-                    </a>
-                    <div class="flex items-center gap-4">
-                        <a href="#" class="text-slate-500 hover:text-white transition-colors">
-                            <i data-lucide="linkedin" class="w-5 h-5"></i>
-                        </a>
-                        <a href="#" class="text-slate-500 hover:text-white transition-colors">
-                            <i data-lucide="twitter" class="w-5 h-5"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
+            <p class="text-sm">ZORIX GLOBAL FZE © 2025. All rights reserved. Operating from Sharjah SAIF Zone, UAE.</p>
         </div>
     </footer>
 
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
     <script>
-        // Initialize icons
-        lucide.createIcons();
-        
-        // Enhanced navigation system
-        const pages = document.querySelectorAll('.page-content');
-        const navLinks = document.querySelectorAll('.nav-link');
-        const mobileMenu = document.getElementById('mobile-menu');
-        const mobileMenuButton = document.getElementById('mobile-menu-button');
-        
-        // Create animated particles
-        function createParticles() {
-            const container = document.getElementById('particles');
-            if (!container) return;
-            
-            const particleCount = 30;
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initialize Lucide Icons
+            lucide.createIcons();
+
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+            const navLinks = document.querySelectorAll('.nav-link, .mobile-nav-link');
+            const sections = document.querySelectorAll('section');
+            const body = document.body;
+
+            // --- 1. Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => {
+                const isExpanded = mobileMenuButton.getAttribute('aria-expanded') === 'true' || false;
+                mobileMenuButton.setAttribute('aria-expanded', !isExpanded);
+                mobileMenu.classList.toggle('hidden');
+                // Optional: Prevent background scroll when menu is open
+                body.classList.toggle('overflow-hidden', !isExpanded);
+            });
+
+            // Close mobile menu when a link is clicked
+            navLinks.forEach(link => {
+                link.addEventListener('click', () => {
+                    if (!mobileMenu.classList.contains('hidden')) {
+                        mobileMenu.classList.add('hidden');
+                        mobileMenuButton.setAttribute('aria-expanded', 'false');
+                        body.classList.remove('overflow-hidden');
+                    }
+                });
+            });
+
+            // --- 2. Page Content Visibility Management ---
+            function showPage(id) {
+                sections.forEach(section => {
+                    section.classList.add('hidden');
+                });
+                const targetSection = document.getElementById(id);
+                if (targetSection) {
+                    targetSection.classList.remove('hidden');
+                }
+            }
+
+            // Initial page load (Home)
+            showPage('home');
+
+            // Navigation listener for smooth scrolling and page switching
+            navLinks.forEach(link => {
+                link.addEventListener('click', (e) => {
+                    const href = link.getAttribute('href');
+                    if (href && href.startsWith('#')) {
+                        e.preventDefault();
+                        const targetId = href.substring(1);
+                        showPage(targetId);
+
+                        // Smooth scroll to the top of the newly shown section
+                        document.getElementById(targetId).scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+
+                        // Update active state (optional but good practice)
+                        // This would require a more complex function if you want a true active state based on scroll position.
+                    }
+                });
+            });
+
+
+            // --- 3. Form Submission Handling ---
+            const contactForm = document.getElementById('contact-form');
+            const formSuccess = document.getElementById('form-success');
+
+            contactForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                
+                // Simulate form submission success
+                contactForm.reset();
+                formSuccess.classList.remove('hidden');
+
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    formSuccess.classList.add('hidden');
+                }, 5000);
+            });
+
+            // --- 4. Particle Background Effect (Simplified) ---
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
             for (let i = 0; i < particleCount; i++) {
                 const particle = document.createElement('div');
-                particle.className = 'particle';
+                particle.classList.add('particle');
                 
-                // Random properties
-                const size = Math.random() * 100 + 50;
-                const posX = Math.random() * 100;
-                const posY = Math.random() * 100;
-                const duration = Math.random() * 20 + 10;
-                const delay = Math.random() * 5;
-                
+                // Random size
+                const size = Math.random() * 8 + 4; // 4px to 12px
                 particle.style.width = `${size}px`;
                 particle.style.height = `${size}px`;
-                particle.style.left = `${posX}%`;
-                particle.style.top = `${posY}%`;
-                particle.style.opacity = Math.random() * 0.1 + 0.05;
-                particle.style.animationDuration = `${duration}s`;
-                particle.style.animationDelay = `${delay}s`;
                 
-                container.appendChild(particle);
-            }
-        }
-        
-        // Show page with animation
-        function showPage(pageId) {
-            // Hide all pages
-            pages.forEach(page => {
-                page.classList.add('hidden');
-                page.classList.remove('fade-in');
-            });
-            
-            // Show target page with animation
-            const targetPage = document.getElementById(pageId);
-            if (targetPage) {
-                targetPage.classList.remove('hidden');
-                setTimeout(() => {
-                    targetPage.classList.add('fade-in');
-                }, 50);
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
                 
-                // Update URL hash
-                window.location.hash = pageId;
+                // Randomize animation duration and delay
+                particle.style.animationDuration = `${Math.random() * 10 + 5}s`;
+                particle.style.animationDelay = `${Math.random() * 5}s`;
+                
+                particlesContainer.appendChild(particle);
             }
             
-            // Update active nav link
-            navLinks.forEach(link => {
-                link.classList.remove('active', 'text-primary');
-                if (link.getAttribute('data-page') === pageId) {
-                    link.classList.add('text-primary');
-                    // Add custom active indicator
-                    link.style.setProperty('--underline-width', '100%');
-                }
-            });
-            
-            // Close mobile menu
-            mobileMenu.classList.add('hidden');
-            
-            // Re-render icons
-            setTimeout(() => lucide.createIcons(), 100);
-        }
-        
-        // Navigation function
-        function navigateTo(pageId) {
-            showPage(pageId);
-        }
-        
-        // Handle hash changes
-        function handleHashChange() {
-            const hash = window.location.hash.substring(1) || 'home';
-            if (document.getElementById(hash)) {
-                showPage(hash);
-            }
-        }
-        
-        // Mobile menu toggle
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-            mobileMenu.classList.toggle('animate-slide-in');
-        });
-        
-        // Form submission
-        document.getElementById('contact-form')?.addEventListener('submit', function(e) {
-            e.preventDefault();
-            const successMessage = document.getElementById('form-success');
-            successMessage.classList.remove('hidden');
-            
-            // Reset form
-            setTimeout(() => {
-                this.reset();
-                successMessage.classList.add('hidden');
-            }, 3000);
-        });
-        
-        // Initialize
-        document.addEventListener('DOMContentLoaded', () => {
-            createParticles();
-            handleHashChange();
-            
-            // Add scroll animations
-            const observerOptions = {
-                threshold: 0.1,
-                rootMargin: '0px 0px -100px 0px'
-            };
-            
+            // --- 5. Scroll Reveal/Stagger Animation (Intersection Observer) ---
+            const staggerChildren = document.querySelectorAll('.stagger-child');
+
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add('animate-slide-in');
+                        entry.target.classList.add('is-visible');
+                        observer.unobserve(entry.target); // Stop observing once visible
                     }
                 });
-            }, observerOptions);
-            
-            // Observe elements for animations
-            document.querySelectorAll('.modern-card').forEach(card => {
-                observer.observe(card);
+            }, {
+                threshold: 0.1 // Trigger when 10% of the element is visible
             });
-        });
-        
-        // Handle hash changes
-        window.addEventListener('hashchange', handleHashChange);
-        
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function(e) {
-                const href = this.getAttribute('href');
-                if (href !== '#') {
-                    e.preventDefault();
-                    const targetId = href.substring(1);
-                    navigateTo(targetId);
-                }
+
+            staggerChildren.forEach(element => {
+                observer.observe(element);
             });
         });
     </script>
